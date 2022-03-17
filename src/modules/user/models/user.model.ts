@@ -12,6 +12,7 @@ import { ApiProperty } from '@nestjs/swagger';
 // МОДЕЛИ БД
 import { UserRoles } from '../../role/models/user-role.model';
 import { Role } from 'src/modules/role/models/role.model';
+import { IsOptional } from 'class-validator';
 
 interface UserCreationAttrs {
   email: string;
@@ -79,6 +80,7 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
     example: 'Петрович',
     description: 'Отчество',
   })
+  @IsOptional()
   @Column({ type: DataType.STRING, allowNull: false })
   patronymic: string;
 
