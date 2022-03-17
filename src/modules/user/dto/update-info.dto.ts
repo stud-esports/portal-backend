@@ -5,10 +5,15 @@ export class UpdateUserDto {
   @ApiProperty({ example: 'Иван', description: 'имя' })
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
-  readonly name?: string;
+  readonly first_name?: string;
+
+  @ApiProperty({ example: 'Петрович', description: 'отчество' })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly patronymic?: string;
 
   @ApiProperty({ example: 'Петров', description: 'фамилия' })
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
-  readonly surname?: string;
+  readonly last_name?: string;
 }

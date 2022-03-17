@@ -15,8 +15,9 @@ import { Role } from 'src/modules/role/models/role.model';
 
 interface UserCreationAttrs {
   email: string;
-  name: string;
-  surname: string;
+  first_name: string;
+  last_name: string;
+  patronymic: string;
   password: string;
 }
 
@@ -24,8 +25,9 @@ interface UserAttrs {
   _id: number;
   email: string;
   password: string;
-  name: string;
-  surname: string;
+  first_name: string;
+  last_name: string;
+  patronymic: string;
   roles: Role[];
 }
 
@@ -71,14 +73,21 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
     description: 'Имя',
   })
   @Column({ type: DataType.STRING, allowNull: false })
-  name: string;
+  first_name: string;
+
+  @ApiProperty({
+    example: 'Петрович',
+    description: 'Отчество',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  patronymic: string;
 
   @ApiProperty({
     example: 'Петров',
     description: 'Фамилия',
   })
   @Column({ type: DataType.STRING, allowNull: false })
-  surname: string;
+  last_name: string;
 
   @ApiProperty({ example: 'user@mail.ru', description: 'E-mail' })
   @Column({ type: DataType.STRING, unique: true, allowNull: false })

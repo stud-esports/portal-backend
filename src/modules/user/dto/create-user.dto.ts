@@ -12,8 +12,11 @@ export class CreateUserDto {
   readonly password: string;
   @ApiProperty({ example: 'Иван', description: 'имя' })
   @IsString({ message: 'Должно быть строкой' })
-  readonly name: string;
+  readonly first_name: string;
+  @ApiProperty({ example: 'Петрович', description: 'отчество' })
+  @IsString({ message: 'Должно быть строкой' })
+  readonly patronymic: string;
   @ApiProperty({ example: 'Петров', description: 'фамилия' })
   @IsString({ message: 'Должно быть строкой' })
-  readonly surname: string;
+  readonly last_name: string;
 }
