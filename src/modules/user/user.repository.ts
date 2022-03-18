@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
-import { col, fn, where } from 'sequelize';
+import { col, fn, Op, where } from 'sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-info.dto';
 import { User } from './models/user.model';
@@ -19,6 +19,30 @@ export class UsersRepository {
 
   public async findAll(): Promise<User[] | null> {
     return this.users.scope(['defaultScope', 'withRole', 'allUsers']).findAll();
+  }
+
+  public async findByKeyword(params: { text: string }): Promise<User[] | null> {
+    return this.users.scope(['defaultScope', 'withRole', 'allUsers']).findAll({
+      where: {
+        [Op.or]: [
+          {
+            first_name: {
+              [Op.startsWith]: params?.text,
+            },
+          },
+          {
+            last_name: {
+              [Op.startsWith]: params?.text,
+            },
+          },
+          {
+            patronymic: {
+              [Op.startsWith]: params?.text,
+            },
+          },
+        ],
+      },
+    });
   }
 
   public async findById(
