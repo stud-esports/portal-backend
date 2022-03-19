@@ -52,8 +52,8 @@ import { CurrentUser } from '../auth/decorators/user.decorator';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @ApiOperation({ summary: 'Найти пользователя' })
-  @ApiResponse({ status: 200 })
+  @ApiOperation({ summary: 'Найти пользователей по ФИО (substring)' })
+  @ApiResponse({ status: 200,  type: [User] })
   @Public()
   @Get('/search')
   async getUsersByKeyword(@Query() text: { text: string }) {
