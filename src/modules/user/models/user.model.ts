@@ -99,4 +99,18 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @ApiProperty({
+    example: '+7(999)9999999',
+    description: 'Мобильный номер пользователя',
+  })
+  @Column({ type: DataType.STRING, allowNull: true })
+  phone: string;
+
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'url, по которому можно получить фото',
+  })
+  @Column({ type: DataType.STRING, allowNull: true })
+  photo_url: string;
 }
