@@ -11,6 +11,8 @@ module.exports = {
       first_name: 'Никита',
       patronymic: 'Петрович',
       last_name: 'Петров',
+      phone: '+79999999999',
+      photo_url: null,
       password: hashPassword,
     },
     {
@@ -18,6 +20,8 @@ module.exports = {
       first_name: 'Иван',
       patronymic: 'Петрович',
       last_name: 'Артемьев',
+      phone: '+79999999999',
+      photo_url: null,
       password: hashPassword,
     },
     {
@@ -25,6 +29,8 @@ module.exports = {
       first_name: 'Василий',
       patronymic: 'Петрович',
       last_name: 'Воронцов',
+      phone: '+79999999999',
+      photo_url: null,
       password: hashPassword,
     },
   ],

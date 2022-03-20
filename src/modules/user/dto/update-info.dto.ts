@@ -16,4 +16,20 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
   readonly last_name?: string;
+
+  @ApiProperty({
+    example: '+7(999)9999999',
+    description: 'Мобильный номер пользователя',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly phone: string;
+
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'url, по которому можно получить фото',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly photo_url: string;
 }
