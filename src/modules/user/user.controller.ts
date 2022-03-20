@@ -52,6 +52,14 @@ import { CurrentUser } from '../auth/decorators/user.decorator';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @ApiOperation({ summary: 'Найти пользователей по ФИО (substring)' })
+  @ApiResponse({ status: 200,  type: [User] })
+  @Public()
+  @Get('/search')
+  async getUsersByKeyword(@Query() text: { text: string }) {
+    return await this.usersService.getUsersByKeyword(text);
+  }
+
   @ApiOperation({ summary: 'Создание пользователя' })
   @ApiResponse({ status: 201, type: User })
   @ApiBearerAuth()
@@ -75,7 +83,7 @@ export class UsersController {
   @ApiBearerAuth()
   @Roles(defaultRoles.ADMIN)
   @UseGuards(RolesGuard)
-  @Get()
+  @Get('get-all')
   async getAll() {
     return await this.usersService.getAllUsers();
   }

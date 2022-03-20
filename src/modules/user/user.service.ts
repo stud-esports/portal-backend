@@ -61,6 +61,11 @@ export class UsersService {
     return await this.usersRepository.findAll();
   }
 
+  // ПОЛУЧИТЬ СПИСОК ПОЛЬЗОВАТЕЛЕЙ ПО ФИО
+  async getUsersByKeyword(param: { text: string }) {
+    return await this.usersRepository.findByKeyword(param);
+  }
+
   // УДАЛИТЬ ПОЛЬЗОВАТЕЛЕЯ
   async removeUser(id: number) {
     await this.roleService.removeAllRolesFromUser(id);
