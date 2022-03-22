@@ -25,8 +25,8 @@ export class Contact extends Model {
   user: User;
 
   @ForeignKey(() => User)
-  @Column({ type: DataType.INTEGER })
-  userId: number;
+  @Column({ type: DataType.INTEGER, unique: true, allowNull: false })
+  user_id: number;
 
   @ApiProperty({ example: '1', description: 'Должность пользователя' })
   @Column({
