@@ -18,6 +18,8 @@ import { UsersService } from './user.service';
 
 // РЕПОЗИТОРИИ
 import { UsersRepository } from './user.repository';
+// import { Contact } from '../contacts/entities/contact.entity';
+// import { ContactsModule } from '../contacts/contacts.module';
 
 @Module({
   controllers: [UsersController],
@@ -25,6 +27,7 @@ import { UsersRepository } from './user.repository';
   imports: [
     SequelizeModule.forFeature([User, Role, UserRoles]),
     RoleModule,
+    // ContactsModule,
     forwardRef(() => AuthModule),
   ],
   exports: [UsersService],

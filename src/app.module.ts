@@ -20,6 +20,7 @@ import { FilesModule } from './modules/files/files.module';
 import { NewsModule } from './modules/news/news.module';
 import { News } from './modules/news/entities/news.entity';
 import { MulterModule } from '@nestjs/platform-express';
+import { ContactsModule } from './modules/contacts/contacts.module';
 
 @Module({
   controllers: [],
@@ -46,7 +47,7 @@ import { MulterModule } from '@nestjs/platform-express';
       models: [User, Role, UserRoles, RefreshToken, News],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
-      sync: { force: false },
+      sync: { force: true },
     }),
     MulterModule.register({
       dest: './dist/static/photos',
@@ -56,6 +57,7 @@ import { MulterModule } from '@nestjs/platform-express';
     AuthModule,
     FilesModule,
     NewsModule,
+    ContactsModule,
     // EmailModule,
   ],
 })
