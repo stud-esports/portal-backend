@@ -21,6 +21,7 @@ import { NewsModule } from './modules/news/news.module';
 import { News } from './modules/news/entities/news.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { ContactsModule } from './modules/contacts/contacts.module';
+import { Contact } from './modules/contacts/entities/contact.entity';
 
 @Module({
   controllers: [],
@@ -44,10 +45,10 @@ import { ContactsModule } from './modules/contacts/contacts.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRESS_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, RefreshToken, News],
+      models: [User, Role, UserRoles, RefreshToken, News, Contact],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
-      sync: { force: true },
+      sync: { force: false },
     }),
     MulterModule.register({
       dest: './dist/static/photos',

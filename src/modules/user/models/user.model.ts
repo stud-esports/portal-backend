@@ -1,5 +1,5 @@
 import {
-  BelongsTo,
+  HasOne,
   BelongsToMany,
   Column,
   DataType,
@@ -116,6 +116,6 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: true })
   photo_url: string;
 
-  // @BelongsTo(() => Contact, 'userId')
-  // contact: Contact
+  @HasOne(() => Contact)
+  contact: Contact;
 }

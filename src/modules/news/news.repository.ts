@@ -18,13 +18,10 @@ export class NewsRepository {
     });
   }
 
-  public async findById(
-    id: number
-  ): Promise<News | null> {
-    return this.news
-      .findOne({
-        where: { _id: id },
-      });
+  public async findById(id: number): Promise<News | null> {
+    return this.news.findOne({
+      where: { _id: id },
+    });
   }
 
   public async deleteById(id: number): Promise<number | null> {

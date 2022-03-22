@@ -5,14 +5,14 @@ import { UpdateContactDto } from './dto/update-contact.dto';
 
 @Injectable()
 export class ContactsService {
-  constructor (private readonly contactsRepository: ContactsRepository) {}
-  
+  constructor(private readonly contactsRepository: ContactsRepository) {}
+
   create(createContactDto: CreateContactDto) {
-    return this.contactsRepository.create(createContactDto)
+    return this.contactsRepository.create(createContactDto);
   }
 
   findAll() {
-    return this.contactsRepository.findAll()
+    return this.contactsRepository.findAll();
   }
 
   findOne(id: number) {

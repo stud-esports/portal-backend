@@ -4,7 +4,6 @@ import {
   Column,
   DataType,
   ForeignKey,
-  HasOne,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -22,13 +21,12 @@ export class Contact extends Model {
   })
   _id: number;
 
-  @ApiProperty({ example: '1', description: 'id пользователя' })
-  @HasOne(() => User)
-  // @Column({
-  //   type: DataType.INTEGER,
-  //   allowNull: false,
-  // })
-  userId: string;
+  @BelongsTo(() => User)
+  user: User;
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER })
+  userId: number;
 
   @ApiProperty({ example: '1', description: 'Должность пользователя' })
   @Column({
