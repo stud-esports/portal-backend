@@ -53,7 +53,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @ApiOperation({ summary: 'Найти пользователей по ФИО (substring)' })
-  @ApiResponse({ status: 200,  type: [User] })
+  @ApiResponse({ status: 200, type: [User] })
   @Public()
   @Get('/search')
   async getUsersByKeyword(@Query() text: { text: string }) {
