@@ -24,6 +24,7 @@ export class Contact extends Model {
   @BelongsTo(() => User)
   user: User;
 
+  @ApiProperty({ example: 1, description: 'Уникальный id пользователя' })
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, unique: true, allowNull: false })
   user_id: number;

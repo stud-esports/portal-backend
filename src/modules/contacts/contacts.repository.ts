@@ -25,14 +25,22 @@ export class ContactsRepository {
   }
 
   public async findOne(id: number) {
-    return `This action returns a #${id} contact`;
+    return this.contacts.findOne({
+      where: { _id: id },
+    });
+  }
+
+  public async findOneByUser(id: number) {
+    return this.contacts.findOne({
+      where: { user_id: id },
+    });
   }
 
   public async update(id: number, updateContactDto: UpdateContactDto) {
-    return `This action updates a #${id} contact`;
+    return this.contacts.update(updateContactDto, { where: { _id: id } });
   }
 
   public async remove(id: number) {
-    return `This action removes a #${id} contact`;
+    return this.contacts.destroy({ where: { _id: id } });
   }
 }

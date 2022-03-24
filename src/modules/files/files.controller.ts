@@ -53,7 +53,7 @@ export class FilesController {
     }),
   )
   async uploadedFile(@UploadedFile() file: Express.Multer.File) {
-    const response = {path: '/photos/' + file?.filename};
+    const response = { path: '/photos/' + file?.filename };
     return response;
   }
 
@@ -85,6 +85,6 @@ export class FilesController {
   @Public()
   @Delete()
   async deleteFileByNameAndFolder(@Body() dto: any) {
-    this._filesService.deleteFile(dto.fileName, 'photos')
+    this._filesService.deleteFile(dto.fileName, 'photos');
   }
 }
