@@ -70,21 +70,7 @@ export class ContactsController {
   })
   @Public()
   @Patch(':id')
-  async update(
-    @Param('id') id: number,
-    @Body() updateContactDto: UpdateContactDto,
-  ) {
-    if (updateContactDto.user_id !== id) {
-      const contact = await this._contactsService.findOneByUser(
-        updateContactDto.user_id,
-      );
-      if (contact) {
-        throw new BadRequestException({
-          status: 400,
-          error: 'Контакт с этим пользователем уже существует',
-        });
-      }
-    }
+  update(@Param('id') id: number, @Body() updateContactDto: UpdateContactDto) {
     return this._contactsService.update(+id, updateContactDto);
   }
 
