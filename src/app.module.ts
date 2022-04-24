@@ -22,6 +22,8 @@ import { News } from './modules/news/entities/news.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { ContactsModule } from './modules/contacts/contacts.module';
 import { Contact } from './modules/contacts/entities/contact.entity';
+import { GamesModule } from './modules/games/games.module';
+import { Game } from './modules/games/entities/game.entity';
 
 @Module({
   controllers: [],
@@ -45,7 +47,7 @@ import { Contact } from './modules/contacts/entities/contact.entity';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRESS_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, RefreshToken, News, Contact],
+      models: [User, Role, UserRoles, RefreshToken, News, Contact, Game],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
       sync: { force: false },
@@ -59,6 +61,7 @@ import { Contact } from './modules/contacts/entities/contact.entity';
     FilesModule,
     NewsModule,
     ContactsModule,
+    GamesModule,
     // EmailModule,
   ],
 })
