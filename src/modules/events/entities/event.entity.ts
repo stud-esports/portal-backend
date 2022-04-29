@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
+import sequelize from 'sequelize';
 import { Table, Model, Column, DataType } from 'sequelize-typescript';
 
-@Table({ tableName: 'games', createdAt: false, updatedAt: false })
-export class Game extends Model {
+@Table({ tableName: 'events' })
+export class EventModel extends Model {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
   @Column({
     type: DataType.INTEGER,
@@ -27,12 +28,12 @@ export class Game extends Model {
   })
   description: string;
 
-  @ApiProperty({ example: 'text', description: 'Жанр' })
+  @ApiProperty({ example: 'text', description: 'Дата и время' })
   @Column({
-    type: DataType.STRING,
+    type: "TIMESTAMP",
     allowNull: false,
   })
-  genre: string;
+  date: string;
 
   @ApiProperty({ example: 'text', description: 'URL фото' })
   @Column({
@@ -40,4 +41,16 @@ export class Game extends Model {
     allowNull: true,
   })
   main_image_url: string;
+
+  @Column({
+    type: "TIMESTAMP",
+    allowNull: false,
+  })
+  createdAt: string
+
+  @Column({
+    type: "TIMESTAMP",
+    allowNull: false,
+  })
+  updatedAt: string
 }
