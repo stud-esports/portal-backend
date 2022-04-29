@@ -24,6 +24,7 @@ import { ContactsModule } from './modules/contacts/contacts.module';
 import { Contact } from './modules/contacts/entities/contact.entity';
 import { GamesModule } from './modules/games/games.module';
 import { Game } from './modules/games/entities/game.entity';
+import { EventsModule } from './modules/events/events.module';
 
 @Module({
   controllers: [],
@@ -50,7 +51,11 @@ import { Game } from './modules/games/entities/game.entity';
       models: [User, Role, UserRoles, RefreshToken, News, Contact, Game],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
-      sync: { force: false },
+      // dialectOptions: {
+      //   useUTC: true,
+      // },
+      // timezone: '+00:00',
+      sync: { force: true },
     }),
     MulterModule.register({
       dest: './dist/static/photos',
@@ -62,6 +67,7 @@ import { Game } from './modules/games/entities/game.entity';
     NewsModule,
     ContactsModule,
     GamesModule,
+    EventsModule,
     // EmailModule,
   ],
 })
