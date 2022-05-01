@@ -51,11 +51,7 @@ import { EventsModule } from './modules/events/events.module';
       models: [User, Role, UserRoles, RefreshToken, News, Contact, Game],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
-      // dialectOptions: {
-      //   useUTC: true,
-      // },
-      // timezone: '+00:00',
-      sync: { force: true },
+      sync: { force: false },
     }),
     MulterModule.register({
       dest: './dist/static/photos',

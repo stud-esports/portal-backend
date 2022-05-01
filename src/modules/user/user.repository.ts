@@ -91,4 +91,11 @@ export class UsersRepository {
   ): Promise<[affectedCount: number]> {
     return this.users.update(dto, { where: { _id: id } });
   }
+
+  public async blockUser(
+    id: number,
+    blockInfo: { banned_from_date: string; banned_to_date: string },
+  ): Promise<[affectedCount: number]> {
+    return this.users.update(blockInfo, { where: { _id: id } });
+  }
 }

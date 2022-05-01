@@ -40,4 +40,16 @@ export class CreateUserDto {
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
   readonly photo_url: string;
+
+  @ApiProperty({
+    example: 'Sun, 01 May 2022 18:51:06 GMT',
+    description: 'Дата и время начала блокровки',
+  })
+  readonly banned_from_date: string;
+
+  @ApiProperty({
+    example: 'Sun, 01 May 2022 18:51:06 GMT',
+    description: 'Дата и время окончания блокировки',
+  })
+  readonly banned_to_date: string;
 }
