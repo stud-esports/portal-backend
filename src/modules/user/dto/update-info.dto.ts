@@ -32,4 +32,20 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
   readonly photo_url: string;
+
+  @ApiProperty({
+    example: 'Sun, 01 May 2022 18:51:06 GMT',
+    description: 'Дата и время начала блокровки',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly banned_from_date: string;
+
+  @ApiProperty({
+    example: 'Sun, 01 May 2022 18:51:06 GMT',
+    description: 'Дата и время окончания блокировки',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly banned_to_date: string;
 }

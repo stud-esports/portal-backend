@@ -21,6 +21,8 @@ interface UserCreationAttrs {
   last_name: string;
   patronymic: string;
   password: string;
+  banned_from_date: string;
+  banned_to_date: string;
 }
 
 interface UserAttrs {
@@ -31,6 +33,8 @@ interface UserAttrs {
   last_name: string;
   patronymic: string;
   roles: Role[];
+  banned_from_date: string;
+  banned_to_date: string;
 }
 
 @DefaultScope(() => ({
@@ -118,4 +122,24 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
 
   @HasOne(() => Contact)
   contact: Contact;
+
+  @ApiProperty({
+    example: 'text',
+    description: 'Дата и время начала блокровки',
+  })
+  @Column({
+    type: 'TIMESTAMP',
+    allowNull: true,
+  })
+  banned_from_date: string;
+
+  @ApiProperty({
+    example: 'text',
+    description: 'Дата и время окончания блокировки',
+  })
+  @Column({
+    type: 'TIMESTAMP',
+    allowNull: true,
+  })
+  banned_to_date: string;
 }

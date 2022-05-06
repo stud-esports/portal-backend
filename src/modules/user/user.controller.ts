@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseArrayPipe,
+  Patch,
   Post,
   Put,
   Query,
@@ -78,11 +79,12 @@ export class UsersController {
     return await this.usersService.isEmailAlreadyUsed(dto.email);
   }
 
+  @Public()
   @ApiOperation({ summary: 'Получить всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
   @Roles(defaultRoles.ADMIN)
-  @UseGuards(RolesGuard)
+  // @UseGuards(RolesGuard)
   @Get('get-all')
   async getAll() {
     return await this.usersService.getAllUsers();
@@ -148,5 +150,31 @@ export class UsersController {
     dto: string[],
   ) {
     return await this.usersService.removeRoles(params.userId, dto);
+  }
+
+  @Public()
+  @ApiOperation({ summary: 'Блокировка/разблокировка пользователя' })
+  @ApiResponse({ status: 200, type: User })
+  // @ApiBearerAuth()
+  @Patch('block/:userId')
+  async blockUser(
+    @Param() params: UpdateInfoParams,
+    @Body()
+    blockInfo: { banned_from_date: string; banned_to_date: string },
+  ) {
+    return await this.usersService.blockUser(params.userId, blockInfo);
+  }
+
+  @Public()
+  @ApiOperation({ summary: 'Изменение прав пользователей' })
+  @ApiResponse({ status: 200, type: User })
+  // @ApiBearerAuth()
+  @Patch('/:userId/update-roles')
+  async updateUserRoles(
+    @Param() params: UpdateInfoParams,
+    @Body()
+    roles: { newRoles: { name: string }[]; oldRoles: { name: string }[] },
+  ) {
+    return await this.usersService.updateRoles(params.userId, roles);
   }
 }

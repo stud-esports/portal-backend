@@ -115,4 +115,45 @@ export class UsersService {
 
     await this.roleService.removeRolesFromUser(user._id, rolesNames);
   }
+
+  // БЛОКИРОВАТЬ ПОЛЬЗОВАТЕЛЯ
+  async blockUser(
+    id: number,
+    blockInfo: { banned_from_date: string; banned_to_date: string },
+  ) {
+    return await this.usersRepository.blockUser(id, blockInfo);
+  }
+
+  // ИЗМЕНИТЬ РОЛИ ПОЛЬЗОВАТЕЛЯ
+  async updateRoles(id: number, roles: any) {
+    const rolesToDelete = [];
+    const rolesToAdd = [];
+
+    roles.newRoles.forEach((newRole: { name: string }) => {
+      if (
+        !roles.oldRoles.some(
+          (oldRole: { name: string }) => oldRole.name === newRole.name,
+        )
+      ) {
+        rolesToAdd.push(newRole.name);
+      }
+    });
+
+    roles.oldRoles.forEach((oldRole: { name: string }) => {
+      if (
+        !roles.newRoles.some(
+          (newRole: { name: string }) => newRole.name === oldRole.name,
+        )
+      ) {
+        rolesToDelete.push(oldRole.name);
+      }
+    });
+
+    if (rolesToDelete.length) {
+      this.roleService.removeRolesFromUser(id, rolesToDelete);
+    }
+    rolesToAdd.forEach((roleToAdd) =>
+      this.roleService.setRoleToUser(id, roleToAdd),
+    );
+  }
 }

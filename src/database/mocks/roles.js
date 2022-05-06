@@ -8,5 +8,6 @@ module.exports = {
     {
       name: 'user',
     },
+    { name: 'moderator' },
   ],
 };
