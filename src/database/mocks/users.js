@@ -14,6 +14,8 @@ module.exports = {
       phone: '+79999999999',
       photo_url: null,
       password: hashPassword,
+      banned_from_date: null,
+      banned_to_date: null,
     },
     {
       email: 'testivan@mail.ru',
@@ -23,6 +25,8 @@ module.exports = {
       phone: '+79999999999',
       photo_url: null,
       password: hashPassword,
+      banned_from_date: null,
+      banned_to_date: null,
     },
     {
       email: 'testvasya@mail.ru',
@@ -32,6 +36,8 @@ module.exports = {
       phone: '+79999999999',
       photo_url: null,
       password: hashPassword,
+      banned_from_date: null,
+      banned_to_date: null,
     },
   ],
 };
