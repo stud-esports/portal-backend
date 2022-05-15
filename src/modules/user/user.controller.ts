@@ -79,7 +79,6 @@ export class UsersController {
     return await this.usersService.isEmailAlreadyUsed(dto.email);
   }
 
-  @Public()
   @ApiOperation({ summary: 'Получить всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   // @ApiBearerAuth()

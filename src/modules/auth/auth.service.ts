@@ -28,6 +28,11 @@ export class AuthService {
     return await this.generateTokens(user);
   }
 
+  async signInAdmin(userDto: SignInDto) {
+    const user = await this.validateUserAdmin(userDto);
+    return await this.generateTokens(user);
+  }
+
   async signUp(userDto: CreateUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
 
@@ -60,6 +65,29 @@ export class AuthService {
     if (!user || !passwordEquals) {
       throw new UnauthorizedException({
         message: 'Некорректный email или пароль',
+      });
+    }
+
+    return await this.userService.getUserByEmail(dto.email);
+  }
+
+  private async validateUserAdmin(dto: SignInDto) {
+    const user = await this.userService.getUserByEmail(dto.email, true);
+    const passwordEquals = await this.userService.validateCredentials(
+      dto.password,
+      user,
+    );
+    const isAdmin = await this.userService.checkIsAdmin(user);
+
+    if (!user || !passwordEquals) {
+      throw new UnauthorizedException({
+        message: 'Некорректный email или пароль',
+      });
+    }
+
+    if (!isAdmin) {
+      throw new UnauthorizedException({
+        message: 'Пользователь не является администратором или модератором',
       });
     }
 
