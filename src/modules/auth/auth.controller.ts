@@ -37,6 +37,26 @@ export class AuthController {
       .send({ access_token, refresh_token, user });
   }
 
+  @ApiOperation({ summary: 'Вход по почте и паролю в админку' })
+  @ApiResponse({ status: 200, type: SignInRes })
+  @Public()
+  @Post('/admin/sign-in')
+  async signInAdmin(
+    @Body() userDto: SignInDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    const { user, access_token, refresh_token } = await this.authService.signInAdmin(
+      userDto,
+    );
+
+    response
+      .cookie('refresh_token', refresh_token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      })
+      .send({ access_token, refresh_token, user });
+  }
+
   @ApiOperation({ summary: 'Регистрация пользователя' })
   @ApiResponse({ status: 200, type: SignUpRes })
   @Public()

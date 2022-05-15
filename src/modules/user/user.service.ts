@@ -29,6 +29,12 @@ export class UsersService {
     return await compare(password, user.password);
   }
 
+  public async checkIsAdmin(user: User): Promise<boolean> {
+    return await user.roles.some(
+      (role) => role.name === 'admin' || role.name === 'moderator',
+    );
+  }
+
   // СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ
   async createUser(dto: CreateUserDto) {
     const candidate = await this.usersRepository.findByEmail(dto.email);
