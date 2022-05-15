@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { GamesService } from './games.service';
 import { CreateGameDto } from './dto/create-game.dto';
@@ -48,5 +49,13 @@ export class GamesController {
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.gamesService.remove(+id);
+  }
+
+  @ApiOperation({ summary: 'Найти дисциплину (игру) по названию (substring)' })
+  @ApiResponse({ status: 200, type: [Game] })
+  @Public()
+  @Get('/search')
+  async getUsersByKeyword(@Query() text: { text: string }) {
+    return await this.gamesService.getGamesByKeyword(text);
   }
 }

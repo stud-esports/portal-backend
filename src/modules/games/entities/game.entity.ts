@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import { Table, Model, Column, DataType, HasOne } from 'sequelize-typescript';
+import { Team } from 'src/modules/teams/entities/team.entity';
 
 @Table({ tableName: 'games', createdAt: false, updatedAt: false })
 export class Game extends Model {
@@ -40,4 +41,7 @@ export class Game extends Model {
     allowNull: true,
   })
   main_image_url: string;
+
+  @HasOne(() => Team)
+  team: Team;
 }

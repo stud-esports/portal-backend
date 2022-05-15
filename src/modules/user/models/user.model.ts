@@ -14,6 +14,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { UserRoles } from '../../role/models/user-role.model';
 import { Role } from 'src/modules/role/models/role.model';
 import { Contact } from 'src/modules/contacts/entities/contact.entity';
+import { Team } from 'src/modules/teams/entities/team.entity';
 
 interface UserCreationAttrs {
   email: string;
@@ -142,4 +143,7 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
     allowNull: true,
   })
   banned_to_date: string;
+
+  @HasOne(() => Team)
+  captain: Team;
 }

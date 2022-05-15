@@ -26,4 +26,8 @@ export class GamesService {
   remove(id: number) {
     return this._gameRepository.deleteById(id);
   }
+
+  getGamesByKeyword(param: { text: string }) {
+    return this._gameRepository.findByKeyword(param);
+  }
 }
