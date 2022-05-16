@@ -81,9 +81,9 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Получить всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
-  // @ApiBearerAuth()
+  @ApiBearerAuth()
   @Roles(defaultRoles.ADMIN)
-  // @UseGuards(RolesGuard)
+  @UseGuards(RolesGuard)
   @Get('get-all')
   async getAll() {
     return await this.usersService.getAllUsers();
@@ -151,9 +151,11 @@ export class UsersController {
     return await this.usersService.removeRoles(params.userId, dto);
   }
 
-  @Public()
+  @Roles(defaultRoles.ADMIN)
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Блокировка/разблокировка пользователя' })
   @ApiResponse({ status: 200, type: User })
+  @ApiBearerAuth()
   // @ApiBearerAuth()
   @Patch('block/:userId')
   async blockUser(
@@ -164,9 +166,11 @@ export class UsersController {
     return await this.usersService.blockUser(params.userId, blockInfo);
   }
 
-  @Public()
+  @Roles(defaultRoles.ADMIN)
+  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Изменение прав пользователей' })
   @ApiResponse({ status: 200, type: User })
+  @ApiBearerAuth()
   // @ApiBearerAuth()
   @Patch('/:userId/update-roles')
   async updateUserRoles(
