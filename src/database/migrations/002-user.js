@@ -15,17 +15,38 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      name: {
+      first_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      surname: {
+      last_name: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      patronymic: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      photo_url: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      banned_from_date: {
+        type: 'TIMESTAMP',
+        allowNull: true,
+      },
+      banned_to_date: {
+        type: 'TIMESTAMP',
+        allowNull: true,
       },
     });
   },
