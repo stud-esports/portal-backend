@@ -24,6 +24,7 @@ interface UserCreationAttrs {
   password: string;
   banned_from_date: string;
   banned_to_date: string;
+  gender: string
 }
 
 interface UserAttrs {
@@ -36,6 +37,7 @@ interface UserAttrs {
   roles: Role[];
   banned_from_date: string;
   banned_to_date: string;
+  gender: string
 }
 
 @DefaultScope(() => ({
@@ -95,6 +97,13 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
   })
   @Column({ type: DataType.STRING, allowNull: false })
   last_name: string;
+
+  @ApiProperty({
+    example: 'м',
+    description: 'Пол',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  gender: string;
 
   @ApiProperty({ example: 'user@mail.ru', description: 'E-mail' })
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
