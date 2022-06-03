@@ -17,6 +17,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'testivan@mail.ru',
@@ -29,6 +30,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'testvasya@mail.ru',
@@ -41,6 +43,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test1@mail.ru',
@@ -53,6 +56,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test2@mail.ru',
@@ -65,6 +69,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test3@mail.ru',
@@ -77,6 +82,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test4@mail.ru',
@@ -89,6 +95,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'testv5@mail.ru',
@@ -101,6 +108,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test6@mail.ru',
@@ -113,6 +121,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test7@mail.ru',
@@ -125,6 +134,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test8@mail.ru',
@@ -137,6 +147,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test9@mail.ru',
@@ -149,6 +160,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test10@mail.ru',
@@ -161,6 +173,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test11@mail.ru',
@@ -173,6 +186,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test12@mail.ru',
@@ -185,6 +199,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test13@mail.ru',
@@ -197,6 +212,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test14@mail.ru',
@@ -209,6 +225,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test15@mail.ru',
@@ -221,6 +238,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test16@mail.ru',
@@ -233,6 +251,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test17@mail.ru',
@@ -245,6 +264,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test18@mail.ru',
@@ -257,6 +277,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test19@mail.ru',
@@ -269,6 +290,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
     {
       email: 'test20@mail.ru',
@@ -281,6 +303,7 @@ module.exports = {
       password: hashPassword,
       banned_from_date: null,
       banned_to_date: null,
+      block_reason: '',
     },
   ],
 };

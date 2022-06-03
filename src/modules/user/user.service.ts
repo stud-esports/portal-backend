@@ -125,7 +125,11 @@ export class UsersService {
   // БЛОКИРОВАТЬ ПОЛЬЗОВАТЕЛЯ
   async blockUser(
     id: number,
-    blockInfo: { banned_from_date: string; banned_to_date: string },
+    blockInfo: {
+      banned_from_date: string;
+      banned_to_date: string;
+      block_reason: string;
+    },
   ) {
     return await this.usersRepository.blockUser(id, blockInfo);
   }

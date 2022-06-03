@@ -94,7 +94,11 @@ export class UsersRepository {
 
   public async blockUser(
     id: number,
-    blockInfo: { banned_from_date: string; banned_to_date: string },
+    blockInfo: {
+      banned_from_date: string;
+      banned_to_date: string;
+      block_reason: string;
+    },
   ): Promise<[affectedCount: number]> {
     return this.users.update(blockInfo, { where: { _id: id } });
   }
