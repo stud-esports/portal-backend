@@ -161,7 +161,11 @@ export class UsersController {
   async blockUser(
     @Param() params: UpdateInfoParams,
     @Body()
-    blockInfo: { banned_from_date: string; banned_to_date: string },
+    blockInfo: {
+      banned_from_date: string;
+      banned_to_date: string;
+      block_reason: string;
+    },
   ) {
     return await this.usersService.blockUser(params.userId, blockInfo);
   }

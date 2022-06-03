@@ -33,7 +33,21 @@ export class EventModel extends Model {
     type: "TIMESTAMP",
     allowNull: false,
   })
-  date: string;
+  start: string;
+
+  @ApiProperty({ example: 'text', description: 'Дата и время' })
+  @Column({
+    type: "TIMESTAMP",
+    allowNull: false,
+  })
+  end: string;
+
+  @ApiProperty({ example: 'Московский политех', description: 'Место проведения' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  location: string;
 
   @ApiProperty({ example: 'text', description: 'URL фото' })
   @Column({

@@ -153,6 +153,13 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
   })
   banned_to_date: string;
 
+  @ApiProperty({
+    example: 'Ругается матом в комментариях',
+    description: 'Причина блокировки',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  block_reason: string;
+
   @HasOne(() => Team)
   captain: Team;
 }

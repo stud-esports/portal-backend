@@ -8,8 +8,9 @@ export class EventsService {
   constructor(private _eventRepository: EventRepository) {}
 
   create(createEventDto: CreateEventDto) {
-    const date = this.prepareDateForDatabase(createEventDto.date);
-    return this._eventRepository.create({ ...createEventDto, date });
+    const start = this.prepareDateForDatabase(createEventDto.start);
+    const end = this.prepareDateForDatabase(createEventDto.end);
+    return this._eventRepository.create({ ...createEventDto, start, end });
   }
 
   findAll() {
@@ -17,8 +18,9 @@ export class EventsService {
   }
 
   update(id: number, updateEventDto: UpdateEventDto) {
-    const date = this.prepareDateForDatabase(updateEventDto.date);
-    return this._eventRepository.update(id, { ...updateEventDto, date });
+    const start = this.prepareDateForDatabase(updateEventDto.start);
+    const end = this.prepareDateForDatabase(updateEventDto.end);
+    return this._eventRepository.update(id, { ...updateEventDto, start, end });
   }
 
   remove(id: number) {
