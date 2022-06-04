@@ -17,6 +17,11 @@ import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 
+interface CreateTeamMember {
+  user_id: number;
+  team_id: number;
+}
+
 @Controller('teams')
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
@@ -62,4 +67,21 @@ export class TeamsController {
   remove(@Param('id') id: string) {
     return this.teamsService.remove(+id);
   }
+
+  @ApiOperation({ summary: 'Записать пользователя в команду' })
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Post('/add-user-to-team')
+  setTeamMember(@Body() createTeamMember: CreateTeamMember) {
+    return this.teamsService.setTeamMember(createTeamMember);
+  }
+
+  @ApiOperation({ summary: 'Удалить пользователя из команды' })
+  @ApiResponse({ status: 200 })
+  @ApiBearerAuth()
+  @Post('/delete-user-from-team')
+  deleteTeamMember(@Body() createTeamMember: CreateTeamMember) {
+    return this.teamsService.deleteTeamMember(createTeamMember);
+  }
+  
 }

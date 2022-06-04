@@ -16,16 +16,42 @@ export class TeamRepository {
   }
 
   public async findAll(): Promise<Team[] | null> {
-    return this.team.findAll({ include: [
-      {
-        model: User,
-        as: 'captain',
-      },
-      {
-        model: Game,
-        as: 'game',
-      },
-    ],});
+    return this.team.findAll({
+      include: [
+        {
+          model: User,
+          as: 'members',
+        },
+        {
+          model: User,
+          as: 'captain',
+        },
+        {
+          model: Game,
+          as: 'game',
+        },
+      ],
+    });
+  }
+
+  public async findOne(id: number) {
+    return this.team.findOne({
+      include: [
+        {
+          model: User,
+          as: 'members',
+        },
+        {
+          model: User,
+          as: 'captain',
+        },
+        {
+          model: Game,
+          as: 'game',
+        },
+      ],
+      where: { _id: id },
+    });
   }
 
   public async deleteById(id: number): Promise<number | null> {

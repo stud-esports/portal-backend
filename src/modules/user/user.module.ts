@@ -20,12 +20,13 @@ import { UsersService } from './user.service';
 import { UsersRepository } from './user.repository';
 import { Contact } from '../contacts/entities/contact.entity';
 import { Team } from '../teams/entities/team.entity';
+import { Application } from '../applications/entities/application.entity';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService, UsersRepository],
   imports: [
-    SequelizeModule.forFeature([User, Role, UserRoles, Contact, Team]),
+    SequelizeModule.forFeature([User, Role, UserRoles, Contact, Team, Application]),
     RoleModule,
     forwardRef(() => AuthModule),
   ],

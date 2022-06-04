@@ -27,6 +27,9 @@ import { News } from './modules/news/entities/news.entity';
 import { Contact } from './modules/contacts/entities/contact.entity';
 import { Game } from './modules/games/entities/game.entity';
 import { Team } from './modules/teams/entities/team.entity';
+import { TeamMember } from './modules/teams/entities/team_member.entity';
+import { ApplicationsModule } from './modules/applications/applications.module';
+import { Application } from './modules/applications/entities/application.entity';
 
 @Module({
   controllers: [],
@@ -50,7 +53,18 @@ import { Team } from './modules/teams/entities/team.entity';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRESS_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, RefreshToken, News, Contact, Game, Team],
+      models: [
+        User,
+        Role,
+        UserRoles,
+        RefreshToken,
+        News,
+        Contact,
+        Game,
+        Team,
+        TeamMember,
+        Application,
+      ],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
       sync: { force: false },
@@ -67,6 +81,7 @@ import { Team } from './modules/teams/entities/team.entity';
     GamesModule,
     EventsModule,
     TeamsModule,
+    ApplicationsModule,
     // EmailModule,
   ],
 })

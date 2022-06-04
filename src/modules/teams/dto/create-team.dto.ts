@@ -26,5 +26,5 @@ export class CreateTeamDto {
   members_count: number;
 
   @ApiProperty({ example: '1', description: 'URL заглавного фото команды' })
-  logo_url: string;
+  main_image_url: string;
 }
