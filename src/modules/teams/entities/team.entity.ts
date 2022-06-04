@@ -6,9 +6,13 @@ import {
   DataType,
   BelongsTo,
   ForeignKey,
+  BelongsToMany,
+  HasOne,
 } from 'sequelize-typescript';
+import { Application } from 'src/modules/applications/entities/application.entity';
 import { Game } from 'src/modules/games/entities/game.entity';
 import { User } from 'src/modules/user/models/user.model';
+import { TeamMember } from './team_member.entity';
 
 @Table({ tableName: 'teams', createdAt: false, updatedAt: false })
 export class Team extends Model {
@@ -41,7 +45,7 @@ export class Team extends Model {
     type: DataType.STRING,
     allowNull: true,
   })
-  logo_url: string;
+  main_image_url: string;
 
   @BelongsTo(() => User)
   captain: User;
@@ -75,4 +79,10 @@ export class Team extends Model {
     allowNull: true,
   })
   members_count: number;
+
+  @BelongsToMany(() => User, () => TeamMember)
+  members: User[];
+
+  @HasOne(() => Application)
+  team_id: Application;
 }

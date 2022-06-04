@@ -15,6 +15,8 @@ import { UserRoles } from '../../role/models/user-role.model';
 import { Role } from 'src/modules/role/models/role.model';
 import { Contact } from 'src/modules/contacts/entities/contact.entity';
 import { Team } from 'src/modules/teams/entities/team.entity';
+import { TeamMember } from 'src/modules/teams/entities/team_member.entity';
+import { Application } from 'src/modules/applications/entities/application.entity';
 
 interface UserCreationAttrs {
   email: string;
@@ -24,7 +26,7 @@ interface UserCreationAttrs {
   password: string;
   banned_from_date: string;
   banned_to_date: string;
-  gender: string
+  gender: string;
 }
 
 interface UserAttrs {
@@ -37,7 +39,7 @@ interface UserAttrs {
   roles: Role[];
   banned_from_date: string;
   banned_to_date: string;
-  gender: string
+  gender: string;
 }
 
 @DefaultScope(() => ({
@@ -57,6 +59,16 @@ interface UserAttrs {
           attributes: [],
         },
       },
+      // {
+      //   model: Team,
+      //   attributes: {
+      //     exclude: ['_id'],
+      //   },
+      //   exclude: [{ model: TeamMember }],
+      //   through: {
+      //     attributes: [],
+      //   },
+      // },
     ],
   },
   allUsers: {
@@ -116,6 +128,9 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
 
+  @BelongsToMany(() => Team, () => TeamMember)
+  teams: Team[];
+
   @ApiProperty({
     example: '+7(999)9999999',
     description: 'Мобильный номер пользователя',
@@ -135,7 +150,7 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
 
   @ApiProperty({
     example: 'text',
-    description: 'Дата и время начала блокровки',
+    description: 'Дата и время начала блокировки',
   })
   @Column({
     type: 'TIMESTAMP',
@@ -162,4 +177,7 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
 
   @HasOne(() => Team)
   captain: Team;
+
+  @HasOne(() => Application)
+  applicant_id: Application;
 }

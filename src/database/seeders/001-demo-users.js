@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
+const { mockApplications } = require('../mocks/applications');
 const { mockRoles } = require('../mocks/roles');
 const { mockUsers } = require('../mocks/users');
+const { mockTeams } = require('../mocks/teams');
+const { mockGames } = require('../mocks/games');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,6 +13,15 @@ module.exports = {
       returning: true,
     });
     await queryInterface.bulkInsert('users', mockUsers, {
+      returning: true,
+    });
+    await queryInterface.bulkInsert('games', mockGames, {
+      returning: true,
+    });
+    await queryInterface.bulkInsert('teams', mockTeams, {
+      returning: true,
+    });
+    await queryInterface.bulkInsert('applications', mockApplications, {
       returning: true,
     });
     let userRolesArr = [];
