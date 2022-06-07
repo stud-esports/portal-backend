@@ -30,6 +30,8 @@ import { Team } from './modules/teams/entities/team.entity';
 import { TeamMember } from './modules/teams/entities/team_member.entity';
 import { ApplicationsModule } from './modules/applications/applications.module';
 import { Application } from './modules/applications/entities/application.entity';
+import { UniversitiesModule } from './modules/universities/universities.module';
+import { University } from './modules/universities/entities/university.entity';
 
 @Module({
   controllers: [],
@@ -64,6 +66,7 @@ import { Application } from './modules/applications/entities/application.entity'
         Team,
         TeamMember,
         Application,
+        University
       ],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,
@@ -82,6 +85,7 @@ import { Application } from './modules/applications/entities/application.entity'
     EventsModule,
     TeamsModule,
     ApplicationsModule,
+    UniversitiesModule,
     // EmailModule,
   ],
 })

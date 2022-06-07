@@ -9,7 +9,7 @@ module.exports = {
     {
       email: 'testadmin@mail.ru',
       first_name: 'Никита',
-      patronymic: 'Петрович',
+      patronymic: 'Админом',
       last_name: 'Петров',
       gender: 'м',
       phone: '+79999999992',
@@ -18,12 +18,13 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
-      email: 'testivan@mail.ru',
-      first_name: 'Иван',
+      email: 'testmoder1@mail.ru',
+      first_name: 'Университет',
       patronymic: 'Петрович',
-      last_name: 'Артемьев',
+      last_name: 'Модераторов',
       gender: 'м',
       phone: '+79999999991',
       photo_url: null,
@@ -31,12 +32,13 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: 1,
     },
     {
-      email: 'testvasya@mail.ru',
-      first_name: 'Василий',
+      email: 'testmoder2@mail.ru',
+      first_name: 'Портал',
       patronymic: 'Петрович',
-      last_name: 'Воронцов',
+      last_name: 'Модераторов',
       gender: 'м',
       phone: '+79999999993',
       photo_url: null,
@@ -44,6 +46,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: 2,
     },
     {
       email: 'test1@mail.ru',
@@ -57,6 +60,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test2@mail.ru',
@@ -70,6 +74,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test3@mail.ru',
@@ -83,6 +88,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test4@mail.ru',
@@ -96,6 +102,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'testv5@mail.ru',
@@ -109,6 +116,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test6@mail.ru',
@@ -122,6 +130,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test7@mail.ru',
@@ -135,6 +144,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test8@mail.ru',
@@ -148,6 +158,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test9@mail.ru',
@@ -161,6 +172,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test10@mail.ru',
@@ -174,6 +186,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test11@mail.ru',
@@ -187,6 +200,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test12@mail.ru',
@@ -200,6 +214,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test13@mail.ru',
@@ -213,6 +228,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test14@mail.ru',
@@ -226,6 +242,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test15@mail.ru',
@@ -239,6 +256,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test16@mail.ru',
@@ -252,6 +270,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test17@mail.ru',
@@ -265,6 +284,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test18@mail.ru',
@@ -278,6 +298,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test19@mail.ru',
@@ -291,6 +312,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
     {
       email: 'test20@mail.ru',
@@ -304,6 +326,7 @@ module.exports = {
       banned_from_date: null,
       banned_to_date: null,
       block_reason: '',
+      moderated_university_id: null,
     },
   ],
 };

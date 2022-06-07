@@ -8,10 +8,14 @@ const { mockTeams } = require('../mocks/teams');
 const { mockGames } = require('../mocks/games');
 const { mockEvents } = require('../mocks/events');
 const { mockNews } = require('../mocks/news');
+const { mockUniversities } = require('../mocks/universities');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('roles', mockRoles, {
+      returning: true,
+    });
+    await queryInterface.bulkInsert('universities', mockUniversities, {
       returning: true,
     });
     await queryInterface.bulkInsert('users', mockUsers, {
@@ -44,6 +48,19 @@ module.exports = {
         userRolesArr.push(
           {
             role_id: roles.find((val) => val.name === 'admin')._id,
+            user_id: val._id,
+          },
+          {
+            role_id: roles.find((val) => val.name === 'user')._id,
+            user_id: val._id,
+          },
+        );
+      } else if (
+        ['testmoder1@mail.ru', 'testmoder2@mail.ru'].includes(val.email)
+      ) {
+        userRolesArr.push(
+          {
+            role_id: roles.find((val) => val.name === 'moderator')._id,
             user_id: val._id,
           },
           {

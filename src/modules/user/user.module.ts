@@ -21,12 +21,21 @@ import { UsersRepository } from './user.repository';
 import { Contact } from '../contacts/entities/contact.entity';
 import { Team } from '../teams/entities/team.entity';
 import { Application } from '../applications/entities/application.entity';
+import { University } from '../universities/entities/university.entity';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService, UsersRepository],
   imports: [
-    SequelizeModule.forFeature([User, Role, UserRoles, Contact, Team, Application]),
+    SequelizeModule.forFeature([
+      User,
+      Role,
+      UserRoles,
+      Contact,
+      Team,
+      Application,
+      University,
+    ]),
     RoleModule,
     forwardRef(() => AuthModule),
   ],

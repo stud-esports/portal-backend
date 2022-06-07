@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from '../user/models/user.model';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { NewsRepository } from './news.repository';
@@ -11,8 +12,8 @@ export class NewsService {
     return this.newsRepository.create(createNewsDto);
   }
 
-  findAll() {
-    return this.newsRepository.findAll();
+  findAll(user: User, filters?: { university_id: string }) {
+    return this.newsRepository.findAll(user, filters);
   }
 
   findOne(id: number) {

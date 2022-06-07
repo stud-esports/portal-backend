@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { University } from 'src/modules/universities/entities/university.entity';
 
 @Table({ tableName: 'news' })
 export class News extends Model {
@@ -33,4 +41,15 @@ export class News extends Model {
     allowNull: true,
   })
   main_image_url: string;
+
+  @BelongsTo(() => University)
+  university: University;
+
+  @ApiProperty({ example: 'text', description: 'id игры' })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  university_id: number;
 }
