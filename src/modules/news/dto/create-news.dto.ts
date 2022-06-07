@@ -9,4 +9,7 @@ export class CreateNewsDto {
 
   @ApiProperty({ example: '1', description: 'Заглавное фото новости' })
   main_image_url: string;
+
+  @ApiProperty({ example: '1', description: 'Университет' })
+  university_id: number;
 }

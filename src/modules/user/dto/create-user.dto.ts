@@ -52,4 +52,10 @@ export class CreateUserDto {
     description: 'Дата и время окончания блокировки',
   })
   readonly banned_to_date: string;
+
+  @ApiProperty({
+    example: '1',
+    description: 'id привязанного к модератору университета',
+  })
+  moderated_university_id: number;
 }

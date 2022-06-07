@@ -7,6 +7,8 @@ import {
   Model,
   Scopes,
   Table,
+  BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -17,6 +19,7 @@ import { Contact } from 'src/modules/contacts/entities/contact.entity';
 import { Team } from 'src/modules/teams/entities/team.entity';
 import { TeamMember } from 'src/modules/teams/entities/team_member.entity';
 import { Application } from 'src/modules/applications/entities/application.entity';
+import { University } from 'src/modules/universities/entities/university.entity';
 
 interface UserCreationAttrs {
   email: string;
@@ -27,6 +30,7 @@ interface UserCreationAttrs {
   banned_from_date: string;
   banned_to_date: string;
   gender: string;
+  moderated_university_id: number;
 }
 
 interface UserAttrs {
@@ -40,6 +44,7 @@ interface UserAttrs {
   banned_from_date: string;
   banned_to_date: string;
   gender: string;
+  moderated_university_id: number;
 }
 
 @DefaultScope(() => ({
@@ -58,6 +63,10 @@ interface UserAttrs {
         through: {
           attributes: [],
         },
+      },
+      {
+        model: University,
+        as: 'moderated_university',
       },
       // {
       //   model: Team,
@@ -180,4 +189,18 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
 
   @HasOne(() => Application)
   applicant_id: Application;
+
+  @BelongsTo(() => University)
+  moderated_university: University;
+
+  @ApiProperty({
+    example: '1',
+    description: 'id привязанного к модератору университета',
+  })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  moderated_university_id: number;
 }
