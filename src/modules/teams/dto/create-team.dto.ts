@@ -8,13 +8,13 @@ export class CreateTeamDto {
   description: string;
 
   @ApiProperty({
-    example: '1',
+    example: 1,
     description: 'Уникальный идентификатор капитана команды',
   })
   captain_id: string;
 
   @ApiProperty({
-    example: '1',
+    example: 1,
     description: 'Уникальный идентификатор дисциплины (игры) команды',
   })
   game_id: number;
@@ -22,9 +22,12 @@ export class CreateTeamDto {
   @ApiProperty({ example: '1', description: 'Тип команды' })
   team_type: string;
 
-  @ApiProperty({ example: '1', description: 'Количество участников команды' })
+  @ApiProperty({ example: 1, description: 'Количество участников команды' })
   members_count: number;
 
   @ApiProperty({ example: '1', description: 'URL заглавного фото команды' })
   main_image_url: string;
+
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
+  team_university_id: number;
 }

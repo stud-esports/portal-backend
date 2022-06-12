@@ -12,7 +12,9 @@ import {
 import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { User } from '../user/models/user.model';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
@@ -32,9 +34,16 @@ export class ApplicationsController {
   @ApiResponse({ status: 200, type: Number })
   @ApiBearerAuth()
   @Get()
-  findAll(@Query() filters: { user_id: string; team_type: string }) {
-    console.log(filters);
-    return this.applicationsService.findAll(filters);
+  findAll(
+    @CurrentUser() user: User,
+    @Query()
+    filters: {
+      user_id: string;
+      team_type: string;
+      university_id: string;
+    },
+  ) {
+    return this.applicationsService.findAll(user, filters);
   }
 
   @Get(':id')

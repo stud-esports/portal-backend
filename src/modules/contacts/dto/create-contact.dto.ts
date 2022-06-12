@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateContactDto {
   @ApiProperty({ example: '1', description: 'id пользователя' })
@@ -15,4 +15,10 @@ export class CreateContactDto {
   })
   @IsString({ message: 'Должно быть строкой' })
   questions: string;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Уникальный идентификатор университета',
+  })
+  contact_university_id: number;
 }

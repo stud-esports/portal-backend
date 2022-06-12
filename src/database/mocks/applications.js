@@ -11,6 +11,7 @@ module.exports = {
       createdAt: '2022-06-04T11:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: 1,
     },
     {
       applicant_id: 15,
@@ -21,6 +22,7 @@ module.exports = {
       createdAt: '2022-06-04T12:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: 1,
     },
     {
       applicant_id: 16,
@@ -31,6 +33,7 @@ module.exports = {
       createdAt: '2022-06-04T13:52:03.331Z',
       updatedAt: '2022-06-04T14:52:03.331Z',
       commentary: '',
+      application_university_id: 1,
     },
     {
       applicant_id: 17,
@@ -41,6 +44,7 @@ module.exports = {
       createdAt: '2022-06-04T11:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: 2,
     },
     {
       applicant_id: 18,
@@ -51,6 +55,7 @@ module.exports = {
       createdAt: '2022-06-04T12:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: 2,
     },
     {
       applicant_id: 19,
@@ -61,6 +66,7 @@ module.exports = {
       createdAt: '2022-06-04T13:52:03.331Z',
       updatedAt: '2022-06-04T14:52:03.331Z',
       commentary: '',
+      application_university_id: null,
     },
     {
       applicant_id: 20,
@@ -71,6 +77,7 @@ module.exports = {
       createdAt: '2022-06-04T11:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: null,
     },
     {
       applicant_id: 21,
@@ -81,6 +88,7 @@ module.exports = {
       createdAt: '2022-06-04T12:52:03.331Z',
       updatedAt: '2022-06-04T13:52:03.331Z',
       commentary: '',
+      application_university_id: 1,
     },
   ],
 };

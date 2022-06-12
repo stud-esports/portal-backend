@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import sequelize from 'sequelize';
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+import { University } from 'src/modules/universities/entities/university.entity';
 
 @Table({ tableName: 'events' })
 export class EventModel extends Model {
@@ -30,19 +37,22 @@ export class EventModel extends Model {
 
   @ApiProperty({ example: 'text', description: 'Дата и время' })
   @Column({
-    type: "TIMESTAMP",
+    type: 'TIMESTAMP',
     allowNull: false,
   })
   start: string;
 
   @ApiProperty({ example: 'text', description: 'Дата и время' })
   @Column({
-    type: "TIMESTAMP",
+    type: 'TIMESTAMP',
     allowNull: false,
   })
   end: string;
 
-  @ApiProperty({ example: 'Московский политех', description: 'Место проведения' })
+  @ApiProperty({
+    example: 'Московский политех',
+    description: 'Место проведения',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
@@ -57,14 +67,25 @@ export class EventModel extends Model {
   main_image_url: string;
 
   @Column({
-    type: "TIMESTAMP",
+    type: 'TIMESTAMP',
     allowNull: false,
   })
-  createdAt: string
+  createdAt: string;
 
   @Column({
-    type: "TIMESTAMP",
+    type: 'TIMESTAMP',
     allowNull: false,
   })
-  updatedAt: string
+  updatedAt: string;
+
+  @BelongsTo(() => University)
+  event_university: University;
+
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  event_university_id: number;
 }

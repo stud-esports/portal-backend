@@ -11,6 +11,7 @@ import {
 } from 'sequelize-typescript';
 import { Application } from 'src/modules/applications/entities/application.entity';
 import { Game } from 'src/modules/games/entities/game.entity';
+import { University } from 'src/modules/universities/entities/university.entity';
 import { User } from 'src/modules/user/models/user.model';
 import { TeamMember } from './team_member.entity';
 
@@ -85,4 +86,15 @@ export class Team extends Model {
 
   @HasOne(() => Application)
   team_id: Application;
+
+  @BelongsTo(() => University)
+  team_university: University;
+
+  @ApiProperty({ example: 'text', description: 'id привязанного университета' })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  team_university_id: number;
 }

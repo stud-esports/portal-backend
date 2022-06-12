@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from '../user/models/user.model';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventRepository } from './event.repository';
@@ -13,8 +14,8 @@ export class EventsService {
     return this._eventRepository.create({ ...createEventDto, start, end });
   }
 
-  findAll() {
-    return this._eventRepository.findAll();
+  findAll(user: User, filters?: { university_id: string }) {
+    return this._eventRepository.findAll(user, filters);
   }
 
   update(id: number, updateEventDto: UpdateEventDto) {

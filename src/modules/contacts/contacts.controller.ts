@@ -8,6 +8,7 @@ import {
   Delete,
   BadRequestException,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -18,7 +19,9 @@ import {
 } from '@nestjs/swagger';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { User } from '../user/models/user.model';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
@@ -52,11 +55,19 @@ export class ContactsController {
     return this._contactsService.create(createContactDto);
   }
 
-  @ApiOperation({ summary: 'Получение всех контактов' })
-  @ApiResponse({ status: 200, type: [Contact] })
+  @ApiOperation({ summary: 'Получить всех контактов' })
+  @ApiResponse({ status: 201, type: [Contact] })
+  @ApiBearerAuth()
   @Get()
-  findAll() {
-    return this._contactsService.findAll();
+  findAll(
+    @CurrentUser() user: User,
+    @Query() filters?: { university_id: string },
+  ) {
+    if (filters?.university_id !== 'undefined') {
+      return this._contactsService.findAll(user, filters);
+    } else {
+      return this._contactsService.findAll(user);
+    }
   }
 
   @Roles(defaultRoles.ADMIN, defaultRoles.MODERATOR)

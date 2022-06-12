@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dto/create-team.dto';
@@ -16,6 +17,8 @@ import { Team } from './entities/team.entity';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { CurrentUser } from '../auth/decorators/user.decorator';
+import { User } from '../user/models/user.model';
 
 interface CreateTeamMember {
   user_id: number;
@@ -38,9 +41,17 @@ export class TeamsController {
 
   @ApiOperation({ summary: 'Получить все команды' })
   @ApiResponse({ status: 201, type: [Team] })
+  @ApiBearerAuth()
   @Get()
-  findAll() {
-    return this.teamsService.findAll();
+  findAll(
+    @CurrentUser() user: User,
+    @Query() filters?: { university_id: string },
+  ) {
+    if (filters?.university_id !== 'undefined') {
+      return this.teamsService.findAll(user, filters);
+    } else {
+      return this.teamsService.findAll(user);
+    }
   }
 
   // @Get(':id')
@@ -83,5 +94,4 @@ export class TeamsController {
   deleteTeamMember(@Body() createTeamMember: CreateTeamMember) {
     return this.teamsService.deleteTeamMember(createTeamMember);
   }
-  
 }

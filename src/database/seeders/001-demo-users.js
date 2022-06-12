@@ -9,6 +9,7 @@ const { mockGames } = require('../mocks/games');
 const { mockEvents } = require('../mocks/events');
 const { mockNews } = require('../mocks/news');
 const { mockUniversities } = require('../mocks/universities');
+const { mockContacts } = require('../mocks/contacts');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -34,6 +35,9 @@ module.exports = {
       returning: true,
     });
     await queryInterface.bulkInsert('applications', mockApplications, {
+      returning: true,
+    });
+    await queryInterface.bulkInsert('contacts', mockContacts, {
       returning: true,
     });
     let userRolesArr = [];
