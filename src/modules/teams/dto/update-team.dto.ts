@@ -26,9 +26,12 @@ export class UpdateTeamDto extends PartialType(CreateTeamDto) {
   @ApiProperty({ example: '1', description: 'Тип команды' })
   team_type: string;
 
-  @ApiProperty({ example: '1', description: 'Количество участников команды' })
+  @ApiProperty({ example: 1, description: 'Количество участников команды' })
   members_count: number;
 
   @ApiProperty({ example: '1', description: 'URL заглавного фото команды' })
   main_image_url: string;
+
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
+  team_university_id: number;
 }

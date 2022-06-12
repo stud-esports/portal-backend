@@ -8,6 +8,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { Team } from 'src/modules/teams/entities/team.entity';
+import { University } from 'src/modules/universities/entities/university.entity';
 import { User } from 'src/modules/user/models/user.model';
 
 @Table({ tableName: 'applications', createdAt: false, updatedAt: false })
@@ -95,4 +96,15 @@ export class Application extends Model {
     allowNull: false,
   })
   updatedAt: string;
+
+  @BelongsTo(() => University)
+  application_university: University;
+
+  @ApiProperty({ example: 'text', description: 'id привязанного университета' })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  application_university_id: number;
 }

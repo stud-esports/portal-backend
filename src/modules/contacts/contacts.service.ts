@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from '../user/models/user.model';
 import { ContactsRepository } from './contacts.repository';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
@@ -11,8 +12,8 @@ export class ContactsService {
     return this.contactsRepository.create(createContactDto);
   }
 
-  findAll() {
-    return this.contactsRepository.findAll();
+  findAll(user: User, filters?: { university_id: string }) {
+    return this.contactsRepository.findAll(user, filters);
   }
 
   findOneByUser(id: number) {

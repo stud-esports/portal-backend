@@ -45,7 +45,7 @@ export class News extends Model {
   @BelongsTo(() => University)
   university: University;
 
-  @ApiProperty({ example: 'text', description: 'id игры' })
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
   @ForeignKey(() => University)
   @Column({
     type: DataType.INTEGER,

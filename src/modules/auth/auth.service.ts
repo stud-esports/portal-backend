@@ -91,6 +91,18 @@ export class AuthService {
       });
     }
 
+    if (user.banned_from_date && user.banned_to_date) {
+      const date = new Date();
+      const start = new Date(user.banned_from_date);
+      const end = new Date(user.banned_to_date);
+
+      if (date > start && date < end) {
+        throw new UnauthorizedException({
+          message: 'Аккаунт пользователя заблокирован',
+        });
+      }
+    }
+
     return await this.userService.getUserByEmail(dto.email);
   }
 }

@@ -6,11 +6,12 @@ import { ContactsController } from './contacts.controller';
 import { Contact } from './entities/contact.entity';
 import { ContactsRepository } from './contacts.repository';
 import { User } from '../user/models/user.model';
+import { University } from '../universities/entities/university.entity';
 
 @Module({
   controllers: [ContactsController],
   providers: [ContactsService, ContactsRepository],
   exports: [ContactsService],
-  imports: [SequelizeModule.forFeature([Contact, User])],
+  imports: [SequelizeModule.forFeature([Contact, User, University])],
 })
 export class ContactsModule {}

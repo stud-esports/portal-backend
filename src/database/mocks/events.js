@@ -11,6 +11,7 @@ module.exports = {
       start: '2022-06-20T09:00:00.000Z',
       title: 'Турнир по Dota 2',
       updatedAt: '2022-06-04T20:20:12.320Z',
+      event_university_id: 1,
     },
     {
       createdAt: '2022-06-04T20:20:12.320Z',
@@ -21,6 +22,7 @@ module.exports = {
       start: '2022-06-29T12:00:00.000Z',
       title: 'Матч между командами NaVi и Astralis по игре CS:GO',
       updatedAt: '2022-06-04T20:20:12.320Z',
+      event_university_id: 1,
     },
     {
       createdAt: '2022-06-04T20:20:12.320Z',
@@ -31,6 +33,7 @@ module.exports = {
       start: '2022-07-16T18:00:00.000Z',
       title: 'Турнир по Overwatch',
       updatedAt: '2022-06-04T20:20:12.320Z',
+      event_university_id: null,
     },
     {
       createdAt: '2022-06-04T20:20:12.320Z',
@@ -41,6 +44,7 @@ module.exports = {
       start: '2022-06-23T08:00:00.000Z',
       title: 'Матч по Call of Duty',
       updatedAt: '2022-06-04T20:20:12.320Z',
+      event_university_id: null,
     },
   ],
 };

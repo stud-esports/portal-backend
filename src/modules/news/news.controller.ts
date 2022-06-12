@@ -45,7 +45,6 @@ export class NewsController {
     @CurrentUser() user: User,
     @Query() filters?: { university_id: string },
   ) {
-    console.log(filters);
     if (filters?.university_id !== 'undefined') {
       return this.newsService.findAll(user, filters);
     } else {

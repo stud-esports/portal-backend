@@ -10,6 +10,7 @@ module.exports = {
       game_id: 1,
       members_count: 5,
       main_image_url: null,
+      team_university_id: 1,
     },
     {
       title: 'Astralis',
@@ -19,6 +20,7 @@ module.exports = {
       game_id: 2,
       members_count: 6,
       main_image_url: null,
+      team_university_id: 1,
     },
     {
       title: 'Vitality',
@@ -28,6 +30,7 @@ module.exports = {
       game_id: 3,
       members_count: 3,
       main_image_url: null,
+      team_university_id: 1,
     },
     {
       title: 'Team Liquid',
@@ -37,6 +40,7 @@ module.exports = {
       game_id: 4,
       members_count: 5,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'ENCE',
@@ -46,6 +50,7 @@ module.exports = {
       game_id: 5,
       members_count: 4,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'FaZe Clan',
@@ -55,6 +60,7 @@ module.exports = {
       game_id: 6,
       members_count: 4,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'NRG Esports',
@@ -64,6 +70,7 @@ module.exports = {
       game_id: 7,
       members_count: 4,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'FURIA',
@@ -73,6 +80,7 @@ module.exports = {
       game_id: 8,
       members_count: 5,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'G2 Esports',
@@ -82,6 +90,7 @@ module.exports = {
       game_id: 9,
       members_count: 5,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'North',
@@ -91,6 +100,7 @@ module.exports = {
       game_id: 10,
       members_count: 6,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'Mousesports',
@@ -100,6 +110,7 @@ module.exports = {
       game_id: 11,
       members_count: 7,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'fnatic',
@@ -109,6 +120,7 @@ module.exports = {
       game_id: 12,
       members_count: 8,
       main_image_url: null,
+      team_university_id: null,
     },
     {
       title: 'MIBR',
@@ -118,6 +130,7 @@ module.exports = {
       game_id: 13,
       members_count: 4,
       main_image_url: null,
+      team_university_id: null,
     },
   ],
 };

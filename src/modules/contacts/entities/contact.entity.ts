@@ -7,6 +7,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+import { University } from 'src/modules/universities/entities/university.entity';
 import { User } from 'src/modules/user/models/user.model';
 
 @Table({ tableName: 'contacts', createdAt: false, updatedAt: false })
@@ -45,4 +46,15 @@ export class Contact extends Model {
     allowNull: true,
   })
   questions: string;
+
+  @BelongsTo(() => University)
+  university: University;
+
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
+  @ForeignKey(() => University)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  contact_university_id: number;
 }

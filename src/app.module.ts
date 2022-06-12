@@ -66,7 +66,7 @@ import { University } from './modules/universities/entities/university.entity';
         Team,
         TeamMember,
         Application,
-        University
+        University,
       ],
       autoLoadModels: process.env.NODE_ENV === 'development',
       retryAttempts: 3,

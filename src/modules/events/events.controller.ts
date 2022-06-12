@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -16,6 +17,8 @@ import { EventModel } from './entities/event.entity';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { CurrentUser } from '../auth/decorators/user.decorator';
+import { User } from '../user/models/user.model';
 
 @Controller('events')
 export class EventsController {
@@ -35,8 +38,15 @@ export class EventsController {
   @ApiResponse({ status: 201, type: [EventModel] })
   @ApiBearerAuth()
   @Get()
-  findAll() {
-    return this.eventsService.findAll();
+  findAll(
+    @CurrentUser() user: User,
+    @Query() filters?: { university_id: string },
+  ) {
+    if (filters?.university_id !== 'undefined') {
+      return this.eventsService.findAll(user, filters);
+    } else {
+      return this.eventsService.findAll(user);
+    }
   }
 
   @Roles(defaultRoles.ADMIN, defaultRoles.MODERATOR)

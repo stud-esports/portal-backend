@@ -16,10 +16,16 @@ export class UpdateEventDto extends PartialType(CreateEventDto) {
 
   @ApiProperty({ example: '1', description: 'Дата окончания события' })
   end: string;
-  
+
   @ApiProperty({ example: '1', description: 'URL заглавного фото события' })
   main_image_url: string;
 
-  @ApiProperty({ example: 'Московский политех', description: 'Место проведения' })
+  @ApiProperty({
+    example: 'Московский политех',
+    description: 'Место проведения',
+  })
   location: string;
+
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
+  event_university_id: number;
 }

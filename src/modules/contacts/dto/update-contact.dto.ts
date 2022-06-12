@@ -16,4 +16,10 @@ export class UpdateContactDto extends PartialType(CreateContactDto) {
   })
   @IsString({ message: 'Должно быть строкой' })
   questions: string;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Уникальный идентификатор университета',
+  })
+  contact_university_id: number;
 }
