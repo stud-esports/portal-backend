@@ -13,7 +13,7 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { EventModel } from './entities/event.entity';
+import { Event } from './entities/event.entity';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -27,7 +27,7 @@ export class EventsController {
   @Roles(defaultRoles.ADMIN, defaultRoles.MODERATOR)
   @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Создание события' })
-  @ApiResponse({ status: 200, type: EventModel })
+  @ApiResponse({ status: 200, type: Event })
   @ApiBearerAuth()
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
@@ -35,7 +35,7 @@ export class EventsController {
   }
 
   @ApiOperation({ summary: 'Получить все события' })
-  @ApiResponse({ status: 201, type: [EventModel] })
+  @ApiResponse({ status: 201, type: [Event] })
   @ApiBearerAuth()
   @Get()
   findAll(

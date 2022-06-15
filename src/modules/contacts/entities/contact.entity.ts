@@ -30,7 +30,10 @@ export class Contact extends Model {
   @Column({ type: DataType.INTEGER, unique: true, allowNull: false })
   user_id: number;
 
-  @ApiProperty({ example: '1', description: 'Должность пользователя' })
+  @ApiProperty({
+    example: 'Старший преподаватель',
+    description: 'Должность пользователя',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
@@ -38,7 +41,7 @@ export class Contact extends Model {
   position: string;
 
   @ApiProperty({
-    example: '1',
+    example: 'Как попасть в сборную? Кто скрывается под маской Бэтмена',
     description: 'Вопросы, по которым можно обратиться',
   })
   @Column({
@@ -56,5 +59,5 @@ export class Contact extends Model {
     type: DataType.INTEGER,
     allowNull: true,
   })
-  contact_university_id: number;
+  university_id: number;
 }

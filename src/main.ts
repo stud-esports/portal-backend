@@ -2,8 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
-import express, { json, urlencoded } from 'express';
-import { join } from 'path';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   try {
@@ -25,11 +24,11 @@ async function bootstrap() {
       .addBearerAuth()
       .build();
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('/api/docs', app, document);
+    SwaggerModule.setup('/api/swagger', app, document);
 
     await app.listen(PORT, () =>
       console.log(
-        `Server started on http://127.0.0.1:${PORT}/api/v1 \nAPI Docs on http://127.0.0.1:${PORT}/api/docs`,
+        `Server started on http://127.0.0.1:${PORT}/api/v1 \nAPI Docs on http://127.0.0.1:${PORT}/api/swagger`,
       ),
     );
   } catch (error) {

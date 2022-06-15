@@ -45,9 +45,8 @@ export class AuthController {
     @Body() userDto: SignInDto,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const { user, access_token, refresh_token } = await this.authService.signInAdmin(
-      userDto,
-    );
+    const { user, access_token, refresh_token } =
+      await this.authService.signInAdmin(userDto);
 
     response
       .cookie('refresh_token', refresh_token, {

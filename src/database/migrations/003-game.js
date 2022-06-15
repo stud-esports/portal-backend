@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('games', {
       _id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -10,50 +10,40 @@ module.exports = {
         unique: true,
         primaryKey: true,
       },
-      email: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      phone: {
+      short_title: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      first_name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      last_name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      patronymic: {
+      description: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      photo_url: {
+      genre: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      store_url: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      banned_from_date: {
-        type: 'TIMESTAMP',
+      main_image_url: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
-      banned_to_date: {
-        type: 'TIMESTAMP',
+      background_image_url: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    // await queryInterface.removeColumn('userRoles', 'userId');
-    await queryInterface.dropTable('users');
-    // await transaction.commit();
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('games');
   },
 };

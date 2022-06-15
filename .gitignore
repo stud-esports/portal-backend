@@ -1,7 +1,7 @@
 # compiled output
 /dist
 /node_modules
-/migrations
+/volumesData
 
 # Logs
 logs
@@ -19,13 +19,6 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 
-#ENV
-.development.env 
-.production.env 
-ormconfig.json
-yarn.lock
-package-lock.json
-
 # IDEs and editors
 /.idea
 .project
@@ -41,3 +34,5 @@ package-lock.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+*.env

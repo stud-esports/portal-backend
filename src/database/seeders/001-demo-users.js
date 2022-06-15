@@ -1,45 +1,45 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
-const { mockApplications } = require('../mocks/applications');
+// const { mockApplications } = require('../mocks/applications');
 const { mockRoles } = require('../mocks/roles');
 const { mockUsers } = require('../mocks/users');
-const { mockTeams } = require('../mocks/teams');
-const { mockGames } = require('../mocks/games');
-const { mockEvents } = require('../mocks/events');
-const { mockNews } = require('../mocks/news');
-const { mockUniversities } = require('../mocks/universities');
-const { mockContacts } = require('../mocks/contacts');
+// const { mockTeams } = require('../mocks/teams');
+// const { mockGames } = require('../mocks/games');
+// const { mockEvents } = require('../mocks/events');
+// const { mockNews } = require('../mocks/news');
+// const { mockUniversities } = require('../mocks/universities');
+// const { mockContacts } = require('../mocks/contacts');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('roles', mockRoles, {
       returning: true,
     });
-    await queryInterface.bulkInsert('universities', mockUniversities, {
-      returning: true,
-    });
+    // await queryInterface.bulkInsert('universities', mockUniversities, {
+    //   returning: true,
+    // });
     await queryInterface.bulkInsert('users', mockUsers, {
       returning: true,
     });
-    await queryInterface.bulkInsert('news', mockNews, {
-      returning: true,
-    });
-    await queryInterface.bulkInsert('events', mockEvents, {
-      returning: true,
-    });
-    await queryInterface.bulkInsert('games', mockGames, {
-      returning: true,
-    });
-    await queryInterface.bulkInsert('teams', mockTeams, {
-      returning: true,
-    });
-    await queryInterface.bulkInsert('applications', mockApplications, {
-      returning: true,
-    });
-    await queryInterface.bulkInsert('contacts', mockContacts, {
-      returning: true,
-    });
+    // await queryInterface.bulkInsert('news', mockNews, {
+    //   returning: true,
+    // });
+    // await queryInterface.bulkInsert('events', mockEvents, {
+    //   returning: true,
+    // });
+    // await queryInterface.bulkInsert('games', mockGames, {
+    //   returning: true,
+    // });
+    // await queryInterface.bulkInsert('teams', mockTeams, {
+    //   returning: true,
+    // });
+    // await queryInterface.bulkInsert('applications', mockApplications, {
+    //   returning: true,
+    // });
+    // await queryInterface.bulkInsert('contacts', mockContacts, {
+    //   returning: true,
+    // });
     let userRolesArr = [];
     const users = (
       await queryInterface.sequelize.query(`SELECT _id, email from users;`)

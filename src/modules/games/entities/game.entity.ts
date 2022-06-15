@@ -14,12 +14,24 @@ export class Game extends Model {
   })
   _id: number;
 
-  @ApiProperty({ example: 'text', description: 'Название' })
+  @ApiProperty({
+    example: 'Contre Strike: Global Offensive',
+    description: 'Название',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
   })
   title: string;
+
+  @ApiProperty({ example: 'CS: GO', description: 'Название' })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  short_title: string;
 
   @ApiProperty({ example: 'text', description: 'Описание' })
   @Column({
@@ -28,19 +40,42 @@ export class Game extends Model {
   })
   description: string;
 
-  @ApiProperty({ example: 'text', description: 'Жанр' })
+  @ApiProperty({ example: 'shooter', description: 'Жанр' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   genre: string;
 
-  @ApiProperty({ example: 'text', description: 'URL фото' })
+  @ApiProperty({
+    example: 'https://steam.com/game/cs-go',
+    description: 'URL игры в магазине',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  store_url: string;
+
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'URL фото игры',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   main_image_url: string;
+
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'URL бэкграунда игры',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+  })
+  background_image_url: string;
 
   @HasOne(() => Team)
   team: Team;

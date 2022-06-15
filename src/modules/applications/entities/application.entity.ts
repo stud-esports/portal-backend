@@ -52,7 +52,7 @@ export class Application extends Model {
     description: 'Уникальный идентификатор команды',
   })
   @ForeignKey(() => Team)
-  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: true })
   team_id: number;
 
   @ApiProperty({
@@ -89,13 +89,13 @@ export class Application extends Model {
     type: 'TIMESTAMP',
     allowNull: false,
   })
-  createdAt: string;
+  created_at: string;
 
   @Column({
     type: 'TIMESTAMP',
     allowNull: false,
   })
-  updatedAt: string;
+  updated_at: string;
 
   @BelongsTo(() => University)
   application_university: University;
@@ -106,5 +106,5 @@ export class Application extends Model {
     type: DataType.INTEGER,
     allowNull: true,
   })
-  application_university_id: number;
+  university_id: number;
 }

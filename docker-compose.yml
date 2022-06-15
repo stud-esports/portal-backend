@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    container_name: ses_host
+    image: postgres:14.3-alpine
+    env_file:
+      - .env
+    volumes:
+      - ./volumesData/postgresql:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    command: -p ${POSTGRES_PORT}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    networks:
+      - postgres
+
+  pgadmin:
+    container_name: ses_pgadmin
+    image: dpage/pgadmin4:6.10
+    env_file:
+      - .env
+    volumes:
+      - ./volumesData/pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT}:80"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - postgres
+
+  backend:
+    container_name: ses_backend
+    build: .
+    # command: bash -c 'while !</dev/tcp/ses_host/${POSTGRES_PORT}; do sleep 5; done; npm run migrate:run-all; node dist/main.js'
+    command: bash -c "backend-init.sh"
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    volumes:
+      - "./volumesData/static:/app/dist/static"
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge

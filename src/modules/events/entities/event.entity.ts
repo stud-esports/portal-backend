@@ -10,7 +10,7 @@ import {
 import { University } from 'src/modules/universities/entities/university.entity';
 
 @Table({ tableName: 'events' })
-export class EventModel extends Model {
+export class Event extends Model {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
   @Column({
     type: DataType.INTEGER,

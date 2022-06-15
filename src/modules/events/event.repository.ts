@@ -4,12 +4,12 @@ import { University } from '../universities/entities/university.entity';
 import { User } from '../user/models/user.model';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { EventModel } from './entities/event.entity';
+import { Event } from './entities/event.entity';
 
 @Injectable()
 export class EventRepository {
   constructor(
-    @InjectModel(EventModel) private event: typeof EventModel,
+    @InjectModel(Event) private event: typeof Event,
     @InjectModel(User) private _userRepository: typeof User,
   ) {}
 
@@ -22,7 +22,7 @@ export class EventRepository {
     filters?: {
       university_id: string;
     },
-  ): Promise<EventModel[] | null> {
+  ): Promise<Event[] | null> {
     const curUserRoles = await this._userRepository
       .scope(['withRole'])
       .findOne({

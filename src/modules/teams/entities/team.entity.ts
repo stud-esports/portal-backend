@@ -27,59 +27,62 @@ export class Team extends Model {
   })
   _id: number;
 
-  @ApiProperty({ example: 'text', description: 'Название' })
+  @ApiProperty({ example: 'NAVI', description: 'Название команды' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   title: string;
 
-  @ApiProperty({ example: 'text', description: 'Описание' })
+  @ApiProperty({ example: 'Просто топчик', description: 'Описание команды' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   description: string;
 
-  @ApiProperty({ example: 'text', description: 'URL фото' })
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'url, по которому можно получить лого',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  main_image_url: string;
+  logo_url: string;
 
-  @BelongsTo(() => User)
-  captain: User;
-
-  @ApiProperty({ example: 1, description: 'id капитана' })
-  @ForeignKey(() => User)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  captain_id: number;
-
-  @ApiProperty({ example: 'text', description: 'Тип команды' })
+  @ApiProperty({ example: 'justTeam', description: 'Тип команды' })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   team_type: string;
 
+  @ApiProperty({ example: 5, description: 'Количество участников команды' })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  members_count: number;
+
+  @BelongsTo(() => User)
+  captain: User;
+
+  @ApiProperty({ example: 1, description: 'id капитана команды' })
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  captain_id: number;
+
   @BelongsTo(() => Game)
   game: Game;
 
-  @ApiProperty({ example: 'text', description: 'id игры' })
+  @ApiProperty({ example: 1, description: 'id игры' })
   @ForeignKey(() => Game)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   game_id: number;
-
-  @ApiProperty({ example: '10', description: 'Количество участников команды' })
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: true,
-  })
-  members_count: number;
 
   @BelongsToMany(() => User, () => TeamMember)
   members: User[];
@@ -90,11 +93,11 @@ export class Team extends Model {
   @BelongsTo(() => University)
   team_university: University;
 
-  @ApiProperty({ example: 'text', description: 'id привязанного университета' })
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
   @ForeignKey(() => University)
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
   })
-  team_university_id: number;
+  university_id: number;
 }

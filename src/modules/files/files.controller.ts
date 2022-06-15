@@ -2,37 +2,20 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Post,
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
 import { Public } from '../auth/decorators/public-url.decorator';
-
-import { extname } from 'path';
 import { FilesService } from './files.service';
-
-export const imageFileFilter = (req, file, callback) => {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    return callback(new Error('Only image files are allowed!'), false);
-  }
-  callback(null, true);
-};
-
-export const editFileName = (req, file, callback) => {
-  const name = file.originalname.split('.')[0];
-  const fileExtName = extname(file.originalname);
-  const randomName = Array(4)
-    .fill(null)
-    .map(() => Math.round(Math.random() * 16).toString(16))
-    .join('');
-  callback(null, `${name}-${randomName}${fileExtName}`);
-};
-
-const DESTINATION = './dist/static/photos';
+import { editFileName, imageFileFilter } from './helpers';
+import { DESTINATION } from './constants';
+import { FilesUploadDto, FileUploadDto } from './dto';
 
 @ApiTags('Файлы')
 @Controller('files')
@@ -40,6 +23,11 @@ export class FilesController {
   constructor(private _filesService: FilesService) {}
 
   @ApiOperation({ summary: 'Сохранение одного файла' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Файл',
+    type: FileUploadDto,
+  })
   @Public()
   @Post()
   @UseInterceptors(
@@ -48,16 +36,20 @@ export class FilesController {
         destination: DESTINATION,
         filename: editFileName,
       }),
-      // fileFilter: imageFileFilter,
+      fileFilter: imageFileFilter,
       // todo добавить проверку расширения
     }),
   )
   async uploadedFile(@UploadedFile() file: Express.Multer.File) {
-    const response = { path: '/photos/' + file?.filename };
-    return response;
+    return { path: '/photos/' + file?.filename };
   }
 
   @ApiOperation({ summary: 'Сохранение нескольких фото' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Список файлов',
+    type: FilesUploadDto,
+  })
   @Public()
   @Post('multiple')
   @UseInterceptors(
@@ -66,7 +58,7 @@ export class FilesController {
         destination: DESTINATION,
         filename: editFileName,
       }),
-      // fileFilter: imageFileFilter,
+      fileFilter: imageFileFilter,
       // todo добавить проверку расширения
     }),
   )
@@ -85,6 +77,13 @@ export class FilesController {
   @Public()
   @Delete()
   async deleteFileByNameAndFolder(@Body() dto: any) {
-    this._filesService.deleteFile(dto.fileName, 'photos');
+    return await this._filesService.deleteFile(dto.fileName, 'photos');
+  }
+
+  @ApiOperation({ summary: 'Показать url всех фото' })
+  @Public()
+  @Get('show-all-photos')
+  async showPhotos() {
+    return this._filesService.showPhotosFolder();
   }
 }

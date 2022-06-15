@@ -181,14 +181,14 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
     example: 'Ругается матом в комментариях',
     description: 'Причина блокировки',
   })
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: true })
   block_reason: string;
 
   @HasOne(() => Team)
   captain: Team;
 
   @HasOne(() => Application)
-  applicant_id: Application;
+  application: Application;
 
   @BelongsTo(() => University)
   moderated_university: University;

@@ -43,4 +43,12 @@ export class FilesService {
   async deletePhoto(fileName: string): Promise<void> {
     return await this.deleteFile(fileName, 'photos');
   }
+
+  async showPhotosFolder() {
+    const folderPath = path.resolve(__dirname, '..', '..', 'static', 'photos');
+    const photos: string[] = [];
+    const files = fs.readdirSync(folderPath, { withFileTypes: true });
+    files.forEach((item) => photos.push(`/photos/${item.name}`));
+    return photos;
+  }
 }

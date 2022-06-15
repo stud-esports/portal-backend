@@ -5,11 +5,11 @@ import { University } from './entities/university.entity';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UniversitiesRepository } from './universities.repository';
 import { User } from '../user/models/user.model';
-import { EventModel } from '../events/entities/event.entity';
+import { Event } from '../events/entities/event.entity';
 
 @Module({
   controllers: [UniversitiesController],
   providers: [UniversitiesService, UniversitiesRepository],
-  imports: [SequelizeModule.forFeature([University, User, EventModel])],
+  imports: [SequelizeModule.forFeature([University, User, Event])],
 })
 export class UniversitiesModule {}
