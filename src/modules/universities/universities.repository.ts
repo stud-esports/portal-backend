@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import sequelize, { Op } from 'sequelize';
 import { Game } from '../games/entities/game.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { University } from './entities/university.entity';
 
 @Injectable()

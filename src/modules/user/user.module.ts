@@ -2,9 +2,9 @@ import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 
 // МОДЕЛИ БД
-import { User } from './models/user.model';
-import { Role } from '../role/models/role.model';
-import { UserRoles } from '../role/models/user-role.model';
+import { User } from './entities/user.entity';
+import { Role } from '../role/entities/role.entity';
+import { UserRoles } from '../role/entities/user-role.entity';
 
 // МОДУЛИ
 import { RoleModule } from '../role/role.module';

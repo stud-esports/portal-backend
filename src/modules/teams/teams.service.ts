@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { TeamMember } from './entities/team_member.entity';
@@ -57,7 +57,7 @@ export class TeamsService {
       );
     }
 
-    this._teamMemberRepository.create({
+    await this._teamMemberRepository.create({
       user_id,
       team_id,
     });

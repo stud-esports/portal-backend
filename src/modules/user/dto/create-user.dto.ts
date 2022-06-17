@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsDate,
+  IsEmail,
+  IsMobilePhone,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'user@mail.ru', description: 'Почта' })
@@ -7,9 +15,30 @@ export class CreateUserDto {
   @IsEmail({}, { message: 'Некорректный email' })
   readonly email: string;
 
-  @ApiProperty({ example: '12345', description: 'пароль' })
+  @ApiProperty({ example: 'testLogin2208', description: 'Логин' })
   @IsString({ message: 'Должно быть строкой' })
-  @Length(4, 16, { message: 'Не меньше 4 и не больше 16' })
+  readonly login: string;
+
+  @ApiProperty({
+    example: '+7(999)9999999',
+    description: 'Мобильный номер пользователя',
+  })
+  @IsString({ message: 'Должно быть строкой' })
+  @IsMobilePhone('ru-RU', undefined, {
+    message: 'Должно быть мобильным номером',
+  })
+  readonly phone: string;
+
+  @ApiProperty({
+    example: new Date('2000-03-04'),
+    description: 'Дата рождения пользователя',
+  })
+  @IsDate({ message: 'Должно быть датой' })
+  readonly birth_date: Date;
+
+  @ApiProperty({ example: '12345678', description: 'пароль' })
+  @IsString({ message: 'Должно быть строкой' })
+  @Length(8, 16, { message: 'Не меньше 8 и не больше 16' })
   readonly password: string;
 
   @ApiProperty({ example: 'Иван', description: 'имя' })
@@ -19,19 +48,11 @@ export class CreateUserDto {
   @ApiProperty({ example: 'Петрович', description: 'отчество' })
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
-  readonly patronymic: string;
+  readonly patronymic?: string;
 
   @ApiProperty({ example: 'Петров', description: 'фамилия' })
   @IsString({ message: 'Должно быть строкой' })
   readonly last_name: string;
-
-  @ApiProperty({
-    example: '+7(999)9999999',
-    description: 'Мобильный номер пользователя',
-  })
-  @IsOptional()
-  @IsString({ message: 'Должно быть строкой' })
-  readonly phone: string;
 
   @ApiProperty({
     example: '/photos/Image-bcd5.jpg',
@@ -39,23 +60,36 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsString({ message: 'Должно быть строкой' })
-  readonly photo_url: string;
+  readonly photo_url?: string;
 
   @ApiProperty({
-    example: 'Sun, 01 May 2022 18:51:06 GMT',
-    description: 'Дата и время начала блокровки',
+    example: 'Немного о себе....',
+    description: 'О себе',
   })
-  readonly banned_from_date: string;
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly about_yourself?: string;
 
   @ApiProperty({
-    example: 'Sun, 01 May 2022 18:51:06 GMT',
-    description: 'Дата и время окончания блокировки',
+    example: 'male',
+    description: 'Пол (male / female)',
   })
-  readonly banned_to_date: string;
+  @IsString({ message: 'Должно быть строкой' })
+  readonly gender: string;
 
   @ApiProperty({
-    example: '1',
-    description: 'id привязанного к модератору университета',
+    example: '123-234-23',
+    description: 'Студенческий билет',
   })
-  moderated_university_id: number;
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  readonly student_card?: string;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Id университета',
+  })
+  @IsOptional()
+  @IsNumber(undefined, { message: 'Должно быть числом' })
+  readonly university_id?: number;
 }

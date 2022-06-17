@@ -5,7 +5,7 @@ import sequelize from 'sequelize';
 import { col, fn, Op, where } from 'sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-info.dto';
-import { User } from './models/user.model';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersRepository {
@@ -71,6 +71,32 @@ export class UsersRepository {
       .findOne({
         where: {
           email: where(fn('lower', col('email')), email.trim().toLowerCase()),
+        },
+      });
+  }
+
+  public async findByPhone(
+    phone: string,
+    withPassword = false,
+  ): Promise<User | null> {
+    return this.users
+      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
+      .findOne({
+        where: {
+          phone: where(fn('lower', col('phone')), phone.trim().toLowerCase()),
+        },
+      });
+  }
+
+  public async findByLogin(
+    login: string,
+    withPassword = false,
+  ): Promise<User | null> {
+    return this.users
+      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
+      .findOne({
+        where: {
+          login: where(fn('lower', col('login')), login.trim().toLowerCase()),
         },
       });
   }

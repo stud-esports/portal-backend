@@ -12,11 +12,11 @@ module.exports = {
       },
       position: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       questions: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
     });
   },

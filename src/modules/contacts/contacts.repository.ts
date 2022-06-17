@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
 import { Contact } from './entities/contact.entity';
@@ -36,7 +36,7 @@ export class ContactsRepository {
 
     if (filters.university_id) {
       return this.contacts.findAll({
-        where: { contact_university_id: +filters.university_id },
+        where: { university_id: +filters.university_id },
         include: [
           {
             model: User,
@@ -50,7 +50,7 @@ export class ContactsRepository {
       });
     } else if (roles.includes('moderator')) {
       return this.contacts.findAll({
-        where: { contact_university_id: null },
+        where: { university_id: null },
         include: [
           {
             model: User,

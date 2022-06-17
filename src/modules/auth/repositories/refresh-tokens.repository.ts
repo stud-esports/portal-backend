@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from '../../user/models/user.model';
-import { RefreshToken } from '../models/refresh-token.model';
+import { User } from '../../user/entities/user.entity';
+import { RefreshToken } from '../entities/refresh-token.entity';
 
 @Injectable()
 export class RefreshTokensRepository {
@@ -9,10 +9,17 @@ export class RefreshTokensRepository {
     @InjectModel(RefreshToken) private refreshTokens: typeof RefreshToken,
   ) {}
 
-  public async create(user: User, ttl: Date): Promise<RefreshToken> {
+  public async create(
+    user: User,
+    token: string,
+    fingerprint: string,
+    ttl: Date,
+  ): Promise<RefreshToken> {
     return this.refreshTokens.create({
       user_id: user._id,
       expires: ttl,
+      token,
+      fingerprint,
     });
   }
 

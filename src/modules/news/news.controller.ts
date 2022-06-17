@@ -22,7 +22,8 @@ import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/user.decorator';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
+import { Public } from '../auth/decorators/public-url.decorator';
 
 @ApiTags('Новости')
 @Controller('news')
@@ -40,30 +41,35 @@ export class NewsController {
 
   @ApiOperation({ summary: 'Получить все новости' })
   @ApiResponse({ status: 201 })
+  @Public()
   @Get()
-  findAll(
-    @CurrentUser() user: User,
+  async findAll(
+    @CurrentUser() user?: User,
     @Query() filters?: { university_id: string },
   ) {
     if (filters?.university_id !== 'undefined') {
-      return this.newsService.findAll(user, filters);
+      return await this.newsService.findAll(user, filters);
     } else {
-      return this.newsService.findAll(user);
+      return await this.newsService.findAll(user);
     }
   }
 
-  @Roles(defaultRoles.ADMIN, defaultRoles.MODERATOR)
-  @UseGuards(RolesGuard)
   @ApiOperation({ summary: 'Найти новость по id' })
-  @ApiBearerAuth()
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.newsService.findOne(+id);
   }
 
-  @ApiOperation({ summary: 'Получить все новости' })
+  @Roles(defaultRoles.ADMIN, defaultRoles.MODERATOR)
+  @UseGuards(RolesGuard)
+  @ApiOperation({ summary: 'Изменить данные новости' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNewsDto: UpdateNewsDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateNewsDto: UpdateNewsDto,
+    @CurrentUser() user?: User,
+  ) {
     console.log('updateNewsDto', updateNewsDto);
     return this.newsService.update(+id, updateNewsDto);
   }

@@ -50,7 +50,6 @@ services:
   backend:
     container_name: ses_backend
     build: .
-    # command: bash -c 'while !</dev/tcp/ses_host/${POSTGRES_PORT}; do sleep 5; done; npm run migrate:run-all; node dist/main.js'
     command: bash -c "backend-init.sh"
     restart: always
     depends_on:

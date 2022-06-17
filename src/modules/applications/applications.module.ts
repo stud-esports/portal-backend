@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { ApplicationsController } from './applications.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { ApplicationRepository } from './application.repository';
 import { Application } from './entities/application.entity';
 import { Team } from '../teams/entities/team.entity';

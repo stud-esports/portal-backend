@@ -4,7 +4,7 @@ import { NewsController } from './news.controller';
 import { NewsRepository } from './news.repository';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { News } from './entities/news.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 
 @Module({
   controllers: [NewsController],

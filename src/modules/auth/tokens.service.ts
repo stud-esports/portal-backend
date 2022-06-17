@@ -2,9 +2,9 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { SignOptions, TokenExpiredError } from 'jsonwebtoken';
 
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { UsersService } from '../user/user.service';
-import { RefreshToken } from './models/refresh-token.model';
+import { RefreshToken } from './entities/refresh-token.entity';
 
 import { RefreshTokensRepository } from './repositories/refresh-tokens.repository';
 import { getTimeForRefreshToken } from './utils/timeForTokens';
@@ -31,17 +31,20 @@ export class TokensService {
     return await this.jwtService.signAsync({}, options);
   }
 
-  public async generateRefreshToken(user: User): Promise<string> {
+  public async generateRefreshToken(
+    user: User,
+    fingerprint: string,
+  ): Promise<string> {
     const ttl = getTimeForRefreshToken();
-    const token = await this.refreshTokensRepository.create(user, ttl);
-
     const options: SignOptions = {
       expiresIn: `${process.env.TTL_REFRESH_TOKEN_IN_DAYS || 10}d`,
       subject: String(user._id),
-      jwtid: String(token._id),
     };
+    const token = await this.jwtService.signAsync({}, options);
 
-    return await this.jwtService.signAsync({}, options);
+    await this.refreshTokensRepository.create(user, token, fingerprint, ttl);
+
+    return token;
   }
 
   public async resolveRefreshToken(
@@ -80,12 +83,13 @@ export class TokensService {
 
   public async createTokensFromRefreshToken(
     refresh: string,
+    fingerprint: string,
   ): Promise<{ access_token: string; refresh_token: string }> {
     const { user } = await this.resolveRefreshToken(refresh);
 
     const access_token = await this.generateAccessToken(user);
 
-    const refresh_token = await this.generateRefreshToken(user);
+    const refresh_token = await this.generateRefreshToken(user, fingerprint);
 
     return { access_token, refresh_token };
   }

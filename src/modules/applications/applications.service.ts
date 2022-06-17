@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { TeamMember } from '../teams/entities/team_member.entity';
 import { TeamsService } from '../teams/teams.service';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { ApplicationRepository } from './application.repository';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';

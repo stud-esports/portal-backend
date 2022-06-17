@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Team } from '../teams/entities/team.entity';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { Application } from './entities/application.entity';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class ApplicationRepository {
     let applications = [];
     if (university_id && university_id !== 'undefined') {
       applications = await this.application.findAll({
-        where: { application_university_id: +filters.university_id },
+        where: { university_id: +filters.university_id },
         include: [
           {
             model: User,
@@ -62,7 +62,7 @@ export class ApplicationRepository {
       return applications;
     } else if (roles.includes('moderator')) {
       applications = await this.application.findAll({
-        where: { application_university_id: null },
+        where: { university_id: null },
         include: [
           {
             model: User,
@@ -120,15 +120,27 @@ export class ApplicationRepository {
   }
 
   public async approveApplication(_id, user_id, team_id, commentary) {
-    this.application.update(
-      { user_id, team_id, commentary, is_archived: true, status: 'approved' },
+    await this.application.update(
+      {
+        applicant_id: user_id,
+        team_id,
+        commentary,
+        is_archived: true,
+        status: 'approved',
+      },
       { where: { _id } },
     );
   }
 
   public async declineApplication(_id, user_id, team_id, commentary) {
-    this.application.update(
-      { user_id, team_id, commentary, is_archived: true, status: 'declined' },
+    await this.application.update(
+      {
+        applicant_id: user_id,
+        team_id,
+        commentary,
+        is_archived: true,
+        status: 'declined',
+      },
       { where: { _id } },
     );
   }

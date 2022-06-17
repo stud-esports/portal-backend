@@ -4,7 +4,7 @@ import { TeamsController } from './teams.controller';
 import { TeamRepository } from './teams.repository';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Game } from '../games/entities/game.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { Team } from './entities/team.entity';
 import { TeamMember } from './entities/team_member.entity';
 import { Application } from '../applications/entities/application.entity';

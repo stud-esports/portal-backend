@@ -1,31 +1,62 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateEventDto } from './create-event.dto';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {
-  @ApiProperty({ example: '1', description: 'id события' })
-  _id: number;
+  @ApiProperty({ example: 'Турнир', description: 'Название события' })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  title?: string;
 
-  @ApiProperty({ example: '1', description: 'Название события' })
-  title: string;
+  @ApiProperty({ example: 'Описание турнира', description: 'Описание события' })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  description?: string;
 
-  @ApiProperty({ example: '1', description: 'Описание события' })
-  description: string;
+  @ApiProperty({
+    example: '2021-05-12T06:57:24.059Z',
+    description: 'Дата и время начала события',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  start?: string;
 
-  @ApiProperty({ example: '1', description: 'Дата начала события' })
-  start: string;
-
-  @ApiProperty({ example: '1', description: 'Дата окончания события' })
-  end: string;
-
-  @ApiProperty({ example: '1', description: 'URL заглавного фото события' })
-  main_image_url: string;
+  @ApiProperty({
+    example: '2021-05-12T06:57:24.059Z',
+    description: 'Дата и время конца события',
+  })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  end?: string;
 
   @ApiProperty({
     example: 'Московский политех',
     description: 'Место проведения',
   })
-  location: string;
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  location?: string;
+
+  @ApiProperty({ example: '/folder/image.png', description: 'URL фото' })
+  @IsOptional()
+  @IsString({ message: 'Должно быть строкой' })
+  main_image_url?: string;
+
+  @ApiProperty({ example: 1, description: 'id пользователя' })
+  @IsOptional()
+  @IsNumber(undefined, { message: 'Должно быть числом' })
+  user_id?: number;
 
   @ApiProperty({ example: 1, description: 'id привязанного университета' })
-  event_university_id: number;
+  @IsOptional()
+  @IsNumber(undefined, { message: 'Должно быть числом' })
+  university_id?: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Уникальный идентификатор дисциплины (игры)',
+  })
+  @IsOptional()
+  @IsNumber(undefined, { message: 'Должно быть числом' })
+  game_id?: number;
 }

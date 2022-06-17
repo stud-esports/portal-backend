@@ -1,6 +1,6 @@
 FROM node:16.15.1-alpine3.16
-RUN apk add --no-cache bash
-RUN apk add --no-cache postgresql-client
+RUN apk add --no-cache bash python3 make g++ postgresql-client
+#RUN apk add --no-cache postgresql-client
 
 WORKDIR /app
 

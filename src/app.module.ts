@@ -21,10 +21,10 @@ import { UniversitiesModule } from './modules/universities/universities.module';
 import { ApplicationsModule } from './modules/applications/applications.module';
 
 // МОДЕЛИ БД
-import { User } from './modules/user/models/user.model';
-import { UserRoles } from './modules/role/models/user-role.model';
-import { Role } from './modules/role/models/role.model';
-import { RefreshToken } from './modules/auth/models/refresh-token.model';
+import { User } from './modules/user/entities/user.entity';
+import { UserRoles } from './modules/role/entities/user-role.entity';
+import { Role } from './modules/role/entities/role.entity';
+import { RefreshToken } from './modules/auth/entities/refresh-token.entity';
 import { News } from './modules/news/entities/news.entity';
 import { Contact } from './modules/contacts/entities/contact.entity';
 import { Game } from './modules/games/entities/game.entity';

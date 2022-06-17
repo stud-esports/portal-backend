@@ -18,7 +18,7 @@ import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { CurrentUser } from '../auth/decorators/user.decorator';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 
 interface CreateTeamMember {
   user_id: number;

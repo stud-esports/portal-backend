@@ -14,12 +14,13 @@ import {
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 
 // МОДЕЛИ БД
-import { User } from './models/user.model';
+import { User } from './entities/user.entity';
 
 // GUARDS
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -34,7 +35,7 @@ import { UsersService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AddRoleDto } from './dto/add-role.dto';
 import { UpdateUserDto } from './dto/update-info.dto';
-import { CheckEmailDto } from './dto/check-email.dto';
+import { CheckEmailDto, CheckLoginDto, CheckPhoneDto } from './dto/checks.dto';
 
 // PARAMS
 import { AddRoleParams } from './params/add-role.params';
@@ -55,10 +56,11 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Найти пользователей по ФИО (substring)' })
   @ApiResponse({ status: 200, type: [User] })
+  @ApiQuery({ name: 'text' })
   @Public()
   @Get('/search')
-  async getUsersByKeyword(@Query() text: { text: string }) {
-    return await this.usersService.getUsersByKeyword(text);
+  async getUsersByKeyword(@Query() param: { text: string }) {
+    return await this.usersService.getUsersByKeyword(param);
   }
 
   @ApiOperation({ summary: 'Создание пользователя' })
@@ -77,6 +79,22 @@ export class UsersController {
   @Get('/check-email')
   async checkEmail(@Query() dto: CheckEmailDto) {
     return await this.usersService.isEmailAlreadyUsed(dto.email);
+  }
+
+  @ApiOperation({ summary: 'Проверить существование логина' })
+  @ApiResponse({ status: 200, type: Boolean })
+  @Public()
+  @Get('/check-login')
+  async checkLogin(@Query() dto: CheckLoginDto) {
+    return await this.usersService.isEmailAlreadyUsed(dto.login);
+  }
+
+  @ApiOperation({ summary: 'Проверить существование номера' })
+  @ApiResponse({ status: 200, type: Boolean })
+  @Public()
+  @Get('/check-phone')
+  async checkPhone(@Query() dto: CheckPhoneDto) {
+    return await this.usersService.isEmailAlreadyUsed(dto.phone);
   }
 
   @ApiOperation({ summary: 'Получить всех пользователей' })

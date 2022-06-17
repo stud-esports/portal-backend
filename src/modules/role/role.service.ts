@@ -6,8 +6,8 @@ import { Op } from 'sequelize';
 import { CreateRoleDto } from './dto/create-role.dto';
 
 // МОДЕЛИ БД
-import { Role } from './models/role.model';
-import { UserRoles } from './models/user-role.model';
+import { Role } from './entities/role.entity';
+import { UserRoles } from './entities/user-role.entity';
 
 @Injectable()
 export class RolesService {

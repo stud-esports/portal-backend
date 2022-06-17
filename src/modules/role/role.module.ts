@@ -8,9 +8,9 @@ import { RolesService } from './role.service';
 import { RolesController } from './role.controller';
 
 // МОДЕЛИ БД
-import { User } from '../user/models/user.model';
-import { UserRoles } from './models/user-role.model';
-import { Role } from './models/role.model';
+import { User } from '../user/entities/user.entity';
+import { UserRoles } from './entities/user-role.entity';
+import { Role } from './entities/role.entity';
 
 @Module({
   providers: [RolesService],

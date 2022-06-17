@@ -30,7 +30,8 @@ module.exports = {
       },
       team_type: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: 'general',
       },
     });
   },

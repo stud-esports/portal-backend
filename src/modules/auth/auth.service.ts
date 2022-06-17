@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UsersService } from '../user/user.service';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
 import { TokensService } from './tokens.service';
 
@@ -17,38 +17,36 @@ export class AuthService {
     private tokensService: TokensService,
   ) {}
 
-  async generateTokens(user: User) {
-    const refresh_token = await this.tokensService.generateRefreshToken(user);
+  async generateTokens(user: User, fingerprint: string) {
+    const refresh_token = await this.tokensService.generateRefreshToken(
+      user,
+      fingerprint,
+    );
     const access_token = await this.tokensService.generateAccessToken(user);
     return { refresh_token, access_token, user };
   }
 
-  async signIn(userDto: SignInDto) {
-    const user = await this.validateUser(userDto);
-    return await this.generateTokens(user);
+  async signIn(dto: SignInDto) {
+    const user = await this.validateUser(dto);
+    return await this.generateTokens(user, dto.fingerprint);
   }
 
-  async signInAdmin(userDto: SignInDto) {
-    const user = await this.validateUserAdmin(userDto);
-    return await this.generateTokens(user);
+  async signInAdmin(dto: SignInDto) {
+    const user = await this.validateUserAdmin(dto);
+    return await this.generateTokens(user, dto.fingerprint);
   }
 
-  async signUp(userDto: CreateUserDto) {
-    const candidate = await this.userService.getUserByEmail(userDto.email);
-
-    if (candidate) {
-      throw new HttpException(
-        'Пользователь с таким email существует',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
+  async signUp(userDto: CreateUserDto, fingerprint: string) {
     const user = await this.userService.createUser(userDto);
 
-    return await this.generateTokens(user);
+    return await this.generateTokens(user, fingerprint);
   }
 
-  async refreshTokens(refreshToken: string) {
-    return await this.tokensService.createTokensFromRefreshToken(refreshToken);
+  async refreshTokens(refreshToken: string, fingerprint: string) {
+    return await this.tokensService.createTokensFromRefreshToken(
+      refreshToken,
+      fingerprint,
+    );
   }
 
   async logout(refreshToken: string) {
@@ -77,7 +75,7 @@ export class AuthService {
       dto.password,
       user,
     );
-    const isAdmin = await this.userService.checkIsAdmin(user);
+    const isAdmin = this.userService.checkIsAdmin(user);
 
     if (!user || !passwordEquals) {
       throw new UnauthorizedException({

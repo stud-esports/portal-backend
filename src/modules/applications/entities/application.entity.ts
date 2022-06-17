@@ -6,13 +6,41 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  Sequelize,
 } from 'sequelize-typescript';
 import { Team } from 'src/modules/teams/entities/team.entity';
 import { University } from 'src/modules/universities/entities/university.entity';
-import { User } from 'src/modules/user/models/user.model';
+import { User } from 'src/modules/user/entities/user.entity';
+
+interface ApplicationCreationAttrs {
+  reason: string;
+  university_id?: number;
+  applicant_id: number;
+  team_id?: number;
+}
+
+interface ApplicationAttrs {
+  _id: number;
+  reason: string;
+  is_archived: boolean;
+  status: string;
+  commentary?: string;
+  university_id?: number;
+  created_at: string;
+  updated_at: string;
+  applicant_id: number;
+  team_id?: number;
+  // Sequelize Relations
+  user: User;
+  university: University;
+  team: Team;
+}
 
 @Table({ tableName: 'applications', createdAt: false, updatedAt: false })
-export class Application extends Model {
+export class Application extends Model<
+  ApplicationAttrs,
+  ApplicationCreationAttrs
+> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
   @Column({
     type: DataType.INTEGER,
@@ -33,28 +61,6 @@ export class Application extends Model {
   })
   reason: string;
 
-  @BelongsTo(() => User)
-  applicant: User;
-
-  @ApiProperty({
-    example: 1,
-    description: 'Уникальный идентификатор создателя заявки',
-  })
-  @ForeignKey(() => User)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  applicant_id: number;
-
-  @BelongsTo(() => Team)
-  team: Team;
-
-  @ApiProperty({
-    example: 1,
-    description: 'Уникальный идентификатор команды',
-  })
-  @ForeignKey(() => Team)
-  @Column({ type: DataType.INTEGER, allowNull: true })
-  team_id: number;
-
   @ApiProperty({
     example: 'true',
     description: 'Заявка обработана',
@@ -62,16 +68,18 @@ export class Application extends Model {
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
   })
   is_archived: boolean;
 
   @ApiProperty({
-    example: 'На рассмотрении',
+    example: 'pending',
     description: 'Статус заявления на вступление в команду',
   })
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    defaultValue: 'pending',
   })
   status: string;
 
@@ -88,23 +96,49 @@ export class Application extends Model {
   @Column({
     type: 'TIMESTAMP',
     allowNull: false,
+    defaultValue: Sequelize.fn('NOW'),
   })
   created_at: string;
 
   @Column({
     type: 'TIMESTAMP',
     allowNull: false,
+    defaultValue: Sequelize.fn('NOW'),
   })
   updated_at: string;
 
-  @BelongsTo(() => University)
-  application_university: University;
-
-  @ApiProperty({ example: 'text', description: 'id привязанного университета' })
+  @ApiProperty({ example: 1, description: 'id привязанного университета' })
   @ForeignKey(() => University)
   @Column({
     type: DataType.INTEGER,
     allowNull: true,
   })
   university_id: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Уникальный идентификатор создателя заявки',
+  })
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  applicant_id: number;
+
+  @ApiProperty({
+    example: 1,
+    description: 'Уникальный идентификатор команды',
+  })
+  @ForeignKey(() => Team)
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  team_id: number;
+
+  // Sequelize Relations
+
+  @BelongsTo(() => Team, 'team_id')
+  team: Team;
+
+  @BelongsTo(() => University, 'university_id')
+  university: University;
+
+  @BelongsTo(() => User, 'applicant_id')
+  applicant: User;
 }

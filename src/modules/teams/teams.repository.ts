@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import sequelize, { Op } from 'sequelize';
 import { Game } from '../games/entities/game.entity';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team } from './entities/team.entity';
@@ -38,7 +38,7 @@ export class TeamRepository {
 
     if (filters.university_id) {
       return this.team.findAll({
-        where: { team_university_id: +filters.university_id },
+        where: { university_id: +filters.university_id },
         include: [
           {
             model: User,
@@ -60,7 +60,7 @@ export class TeamRepository {
       });
     } else if (roles.includes('moderator')) {
       return this.team.findAll({
-        where: { team_university_id: null },
+        where: { university_id: null },
         include: [
           {
             model: User,

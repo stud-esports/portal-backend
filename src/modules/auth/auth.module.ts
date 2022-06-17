@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TokensService } from './tokens.service';
 import { RefreshTokensRepository } from './repositories/refresh-tokens.repository';
-import { RefreshToken } from './models/refresh-token.model';
+import { RefreshToken } from './entities/refresh-token.entity';
 import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({

@@ -1,9 +1,41 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Table, Model, Column, DataType, HasOne } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  HasOne,
+  HasMany,
+} from 'sequelize-typescript';
 import { Team } from 'src/modules/teams/entities/team.entity';
+import { Event } from '../../events/entities/event.entity';
+
+interface GameCreationAttrs {
+  title: string;
+  short_title: string;
+  description?: string;
+  genre: string;
+  store_url?: string;
+  main_image_url?: string;
+  background_image_url?: string;
+}
+
+interface GameAttrs {
+  _id: number;
+  title: string;
+  short_title: string;
+  description?: string;
+  genre: string;
+  store_url?: string;
+  main_image_url?: string;
+  background_image_url?: string;
+  // Sequelize Relations
+  teams: Team[];
+  events: Event[];
+}
 
 @Table({ tableName: 'games', createdAt: false, updatedAt: false })
-export class Game extends Model {
+export class Game extends Model<GameAttrs, GameCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
   @Column({
     type: DataType.INTEGER,
@@ -16,7 +48,7 @@ export class Game extends Model {
 
   @ApiProperty({
     example: 'Contre Strike: Global Offensive',
-    description: 'Название',
+    description: 'Название игры (дисциплины)',
   })
   @Column({
     type: DataType.STRING,
@@ -25,7 +57,10 @@ export class Game extends Model {
   })
   title: string;
 
-  @ApiProperty({ example: 'CS: GO', description: 'Название' })
+  @ApiProperty({
+    example: 'CS: GO',
+    description: 'Короткое название дисциплины (игры)',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -33,14 +68,17 @@ export class Game extends Model {
   })
   short_title: string;
 
-  @ApiProperty({ example: 'text', description: 'Описание' })
+  @ApiProperty({
+    example: 'Короткое описание...',
+    description: 'Описание дисциплины (игры)',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   description: string;
 
-  @ApiProperty({ example: 'shooter', description: 'Жанр' })
+  @ApiProperty({ example: 'shooter', description: 'Жанр дисциплины (игры)' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -77,6 +115,11 @@ export class Game extends Model {
   })
   background_image_url: string;
 
-  @HasOne(() => Team)
-  team: Team;
+  // Sequelize Relations
+
+  @HasMany(() => Team, 'game_id')
+  teams: Team[];
+
+  @HasMany(() => Event, 'game_id')
+  events: Event[];
 }

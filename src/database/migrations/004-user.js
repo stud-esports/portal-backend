@@ -42,6 +42,17 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'not_confirmed',
+      },
+      is_online: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      last_online: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       first_name: {
         type: Sequelize.STRING,
@@ -88,11 +99,11 @@ module.exports = {
         allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
     });

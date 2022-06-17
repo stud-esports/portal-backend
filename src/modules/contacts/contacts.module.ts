@@ -5,7 +5,7 @@ import { ContactsService } from './contacts.service';
 import { ContactsController } from './contacts.controller';
 import { Contact } from './entities/contact.entity';
 import { ContactsRepository } from './contacts.repository';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { University } from '../universities/entities/university.entity';
 
 @Module({

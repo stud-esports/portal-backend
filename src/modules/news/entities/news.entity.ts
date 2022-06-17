@@ -4,14 +4,46 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
+  Sequelize,
   Table,
 } from 'sequelize-typescript';
 import { University } from 'src/modules/universities/entities/university.entity';
-import { User } from '../../user/models/user.model';
+import { User } from '../../user/entities/user.entity';
+import { Event } from '../../events/entities/event.entity';
+import { File } from '../../files/entities/file.entity';
 
-@Table({ tableName: 'news' })
-export class News extends Model {
+interface NewsCreationAttrs {
+  title: string;
+  description: string;
+  text: string;
+  main_image_url?: string;
+  university_id?: number;
+  user_id: number;
+  event_id?: number;
+}
+
+interface NewsAttrs {
+  _id: number;
+  title: string;
+  description: string;
+  text: string;
+  main_image_url?: string;
+  university_id?: number;
+  user_id: number;
+  event_id?: number;
+  created_at: string;
+  updated_At: string;
+  // Sequelize Relations
+  university: University;
+  event: Event;
+  user: User;
+  files: File[];
+}
+
+@Table({ tableName: 'news', createdAt: false, updatedAt: false })
+export class News extends Model<NewsAttrs, NewsCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
   @Column({
     type: DataType.INTEGER,
@@ -36,14 +68,14 @@ export class News extends Model {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
   })
   description: string;
 
   @ApiProperty({ example: 'Много текста...', description: 'Основной текст' })
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
   })
   text: string;
 
@@ -61,22 +93,34 @@ export class News extends Model {
   })
   @Column({
     type: DataType.STRING,
-    allowNull: true,
+    allowNull: false,
+    defaultValue: 'created',
   })
   status: string;
 
-  @ApiProperty({ example: 'text', description: 'Описание' })
+  @ApiProperty({
+    example: '/photos/Image-bcd5.jpg',
+    description: 'url основной картинки',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   main_image_url: string;
 
-  @BelongsTo(() => University)
-  university: University;
+  @Column({
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.fn('NOW'),
+  })
+  created_at: string;
 
-  @BelongsTo(() => User)
-  user: User;
+  @Column({
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.fn('NOW'),
+  })
+  updated_at: string;
 
   @ApiProperty({ example: 1, description: 'id привязанного университета' })
   @ForeignKey(() => University)
@@ -93,4 +137,26 @@ export class News extends Model {
     allowNull: true,
   })
   user_id: number;
+
+  @ApiProperty({ example: 1, description: 'id события' })
+  @ForeignKey(() => Event)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  event_id: number;
+
+  // Sequelize Relations
+
+  @BelongsTo(() => University, 'university_id')
+  university: University;
+
+  @BelongsTo(() => Event, 'event_id')
+  event: Event;
+
+  @BelongsTo(() => User, 'user_id')
+  user: User;
+
+  @HasMany(() => File, 'news_id')
+  files: File[];
 }

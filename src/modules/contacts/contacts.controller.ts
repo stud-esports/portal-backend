@@ -21,7 +21,7 @@ import { defaultRoles } from 'src/enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { CurrentUser } from '../auth/decorators/user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';

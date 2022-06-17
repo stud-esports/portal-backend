@@ -4,18 +4,6 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     // users
 
-    await queryInterface.addColumn('users', 'team_id', {
-      type: Sequelize.INTEGER,
-      references: {
-        model: {
-          tableName: 'teams',
-        },
-        key: '_id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-      allowNull: true,
-    });
     await queryInterface.addColumn('users', 'university_id', {
       type: Sequelize.INTEGER,
       references: {
@@ -82,6 +70,18 @@ module.exports = {
       onDelete: 'CASCADE',
       allowNull: true,
     });
+    await queryInterface.addColumn('news', 'event_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'events',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+      allowNull: true,
+    });
 
     //  users_roles
 
@@ -134,7 +134,7 @@ module.exports = {
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-      allowNull: true,
+      allowNull: false,
     });
 
     //  teams
@@ -161,7 +161,7 @@ module.exports = {
       },
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
-      allowNull: true,
+      allowNull: false,
     });
     await queryInterface.addColumn('teams', 'captain_id', {
       type: Sequelize.INTEGER,
@@ -173,7 +173,7 @@ module.exports = {
       },
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
-      allowNull: true,
+      allowNull: false,
     });
 
     //  team_members
@@ -234,6 +234,84 @@ module.exports = {
       references: {
         model: {
           tableName: 'universities',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+
+    // files
+
+    await queryInterface.addColumn('files', 'user_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'users',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+    await queryInterface.addColumn('files', 'event_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'events',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+    await queryInterface.addColumn('files', 'news_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'news',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+
+    //  events
+
+    await queryInterface.addColumn('events', 'university_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'universities',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+    await queryInterface.addColumn('events', 'user_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'users',
+        },
+        key: '_id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+      allowNull: true,
+    });
+    await queryInterface.addColumn('events', 'game_id', {
+      type: Sequelize.INTEGER,
+      references: {
+        model: {
+          tableName: 'games',
         },
         key: '_id',
       },

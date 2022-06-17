@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
@@ -36,7 +36,7 @@ export class EventRepository {
 
     if (filters.university_id) {
       return this.event.findAll({
-        where: { event_university_id: +filters.university_id },
+        where: { university_id: +filters.university_id },
         include: [
           {
             model: University,
@@ -46,7 +46,7 @@ export class EventRepository {
       });
     } else if (roles.includes('moderator')) {
       return this.event.findAll({
-        where: { event_university_id: null },
+        where: { university_id: null },
         include: [
           {
             model: University,

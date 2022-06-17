@@ -4,7 +4,7 @@ import { UniversitiesController } from './universities.controller';
 import { University } from './entities/university.entity';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UniversitiesRepository } from './universities.repository';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { Event } from '../events/entities/event.entity';
 
 @Module({

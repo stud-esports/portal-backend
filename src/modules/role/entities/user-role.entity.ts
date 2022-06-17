@@ -7,8 +7,8 @@ import {
 } from 'sequelize-typescript';
 
 // МОДЕЛИ БД
-import { User } from '../../user/models/user.model';
-import { Role } from './role.model';
+import { User } from '../../user/entities/user.entity';
+import { Role } from './role.entity';
 
 interface UserRolesCreationAttrs {
   role_id: number;

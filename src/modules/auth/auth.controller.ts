@@ -66,6 +66,7 @@ export class AuthController {
   ) {
     const { user, access_token, refresh_token } = await this.authService.signUp(
       userDto,
+      'testFingerPrint',
     );
 
     response
@@ -90,7 +91,10 @@ export class AuthController {
   @Get('/refresh-tokens')
   async refreshTokens(@Req() request: Request, @Res() response: Response) {
     const { access_token, refresh_token } =
-      await this.authService.refreshTokens(request.cookies.refresh_token || '');
+      await this.authService.refreshTokens(
+        request.cookies.refresh_token || '',
+        'testFingerPrint',
+      );
     response
       .cookie('refresh_token', refresh_token, {
         httpOnly: true,

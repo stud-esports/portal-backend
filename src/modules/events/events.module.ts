@@ -5,7 +5,7 @@ import { EventRepository } from './event.repository';
 import { Event } from './entities/event.entity';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 
 @Module({
   controllers: [EventsController],

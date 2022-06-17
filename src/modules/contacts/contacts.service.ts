@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { ContactsRepository } from './contacts.repository';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';

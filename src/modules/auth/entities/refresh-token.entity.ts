@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -9,17 +10,20 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 // МОДЕЛИ БД
-import { User } from 'src/modules/user/models/user.model';
+import { User } from 'src/modules/user/entities/user.entity';
 
 interface RefreshTokenCreationAttrs {
   expires: Date;
   user_id: number;
+  token: string;
+  fingerprint: string;
 }
 
 interface RefreshTokenAttrs {
   _id: number;
   token: string;
   is_revoked: boolean;
+  fingerprint: string;
   expires: Date;
   user_id: number;
 }
@@ -47,6 +51,26 @@ export class RefreshToken extends Model<
   is_revoked: boolean;
 
   @ApiProperty({
+    example: 'asdajasdahh12h31hb1j1kh',
+    description: 'Refresh Токен',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  token: string;
+
+  @ApiProperty({
+    example: 'asdajasdahh12h31hb1j1kh',
+    description: 'Отпечаток устройства',
+  })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  fingerprint: string;
+
+  @ApiProperty({
     example: '2021-05-12T06:57:24.059Z',
     description: 'Время жизни токена',
   })
@@ -60,4 +84,9 @@ export class RefreshToken extends Model<
   @ForeignKey(() => User)
   @Column
   user_id: number;
+
+  // Sequelize Relations
+
+  @BelongsTo(() => User, 'user_id')
+  user: User;
 }

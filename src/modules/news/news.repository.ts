@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { University } from '../universities/entities/university.entity';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { News } from './entities/news.entity';
@@ -14,11 +14,14 @@ export class NewsRepository {
   ) {}
 
   public async findAll(
-    user: User,
+    user?: User,
     filters?: {
       university_id: string;
     },
   ): Promise<News[] | null> {
+    if (!user) {
+      return this.news.findAll();
+    }
     const curUserRoles = await this._userRepository
       .scope(['withRole'])
       .findOne({

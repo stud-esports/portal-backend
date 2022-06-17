@@ -22,17 +22,18 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'pending',
       },
       commentary: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
     });

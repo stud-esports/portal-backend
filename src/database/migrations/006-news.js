@@ -30,18 +30,19 @@ module.exports = {
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: 'created',
       },
       main_image_url: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: 'TIMESTAMP',
         defaultValue: Sequelize.fn('NOW'),
       },
     });

@@ -3,28 +3,28 @@
 module.exports = {
   mockContacts: [
     {
-      position: '1',
-      questions: '1',
-      user_id: 1,
-      contact_university_id: 1,
-    },
-    {
-      position: '2',
-      questions: '2',
+      position: 'Старший преподаватель',
+      questions: 'Как поступить? Сколько длятся тренировки?',
       user_id: 2,
-      contact_university_id: 1,
+      university_id: 1,
     },
     {
-      position: '3',
-      questions: '3',
+      position: 'Преподаватель по Физре',
+      questions: 'Как поступить? Сколько длятся тренировки?',
       user_id: 3,
-      contact_university_id: null,
+      university_id: 2,
     },
     {
-      position: '4',
-      questions: '4',
+      position: 'PRO игрок',
+      questions: 'Как не перегореть? Сколько зарабатывают игроки?',
+      user_id: 3,
+      university_id: null,
+    },
+    {
+      position: 'Тренер по CS GO',
+      questions: 'Как тренировать aim? Сколько длятся тренировки?',
       user_id: 4,
-      contact_university_id: null,
+      university_id: null,
     },
   ],
 };

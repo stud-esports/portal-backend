@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../user/models/user.model';
+import { User } from '../user/entities/user.entity';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventRepository } from './event.repository';

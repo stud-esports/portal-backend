@@ -10,4 +10,10 @@ export class SignInDto {
   @IsString({ message: 'Должно быть строкой' })
   @Length(4, 16, { message: 'Не меньше 4 и не больше 16' })
   readonly password: string;
+  @ApiProperty({
+    example: 'asdasfeljh1231bkdasdas',
+    description: 'отпечаток устройства',
+  })
+  @IsString({ message: 'Должно быть строкой' })
+  readonly fingerprint: string;
 }
