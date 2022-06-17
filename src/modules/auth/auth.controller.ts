@@ -26,7 +26,10 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const { user, access_token, refresh_token } = await this.authService.signIn(
-      userDto,
+      {
+        ...userDto,
+        fingerprint: userDto.fingerprint ? userDto.fingerprint : 'test',
+      },
     );
 
     response
@@ -46,7 +49,10 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const { user, access_token, refresh_token } =
-      await this.authService.signInAdmin(userDto);
+      await this.authService.signInAdmin({
+        ...userDto,
+        fingerprint: userDto.fingerprint ? userDto.fingerprint : 'test',
+      });
 
     response
       .cookie('refresh_token', refresh_token, {
