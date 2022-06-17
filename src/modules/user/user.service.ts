@@ -76,8 +76,10 @@ export class UsersService {
   }
 
   // ПОЛУЧИТЬ СПИСОК ВСЕХ ПОЛЬЗОВАТЕЛЕЙ
-  async getAllUsers() {
-    return await this.usersRepository.findAll();
+  async getAllUsers(byAdmin = false) {
+    return await this.usersRepository.findAll(
+      byAdmin ? ['withPhone', 'withEmail', 'withUniversity'] : undefined,
+    );
   }
 
   // ПОЛУЧИТЬ СПИСОК ПОЛЬЗОВАТЕЛЕЙ ПО ФИО

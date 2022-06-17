@@ -31,6 +31,7 @@ interface TeamAttrs {
   title: string;
   description?: string;
   members_count: number;
+  team_type: string;
   logo_url?: string;
   university_id?: number;
   game_id: number;

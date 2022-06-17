@@ -18,12 +18,17 @@ export class NewsRepository {
     filters?: {
       university_id: string;
     },
+    customScopes?: string[],
   ): Promise<News[] | null> {
+    const scopes = ['defaultScope'];
+    if (customScopes) {
+      scopes.push(...customScopes);
+    }
     if (!user) {
-      return this.news.findAll();
+      return this.news.scope(scopes).findAll();
     }
     const curUserRoles = await this._userRepository
-      .scope(['withRole'])
+      .scope(['defaultScope'])
       .findOne({
         where: { _id: user._id },
       });
@@ -34,7 +39,7 @@ export class NewsRepository {
     ];
 
     if (filters.university_id) {
-      return this.news.findAll({
+      return this.news.scope(scopes).findAll({
         where: { university_id: +filters.university_id },
         include: [
           {
@@ -44,7 +49,7 @@ export class NewsRepository {
         ],
       });
     } else if (roles.includes('moderator')) {
-      return this.news.findAll({
+      return this.news.scope(scopes).findAll({
         where: { university_id: null },
         include: [
           {
@@ -54,7 +59,7 @@ export class NewsRepository {
         ],
       });
     } else {
-      return this.news.findAll({
+      return this.news.scope(scopes).findAll({
         include: [
           {
             model: University,

@@ -24,7 +24,7 @@ export class ContactsRepository {
     },
   ): Promise<Contact[] | null> {
     const curUserRoles = await this._userRepository
-      .scope(['withRole'])
+      .scope(['defaultScope'])
       .findOne({
         where: { _id: user._id },
       });

@@ -15,6 +15,21 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      link: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
       short_name: {
         type: Sequelize.STRING,
         allowNull: false,

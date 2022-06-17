@@ -22,7 +22,7 @@ export class ApplicationRepository {
   ): Promise<Application[] | null> {
     const { user_id, team_type, university_id } = filters;
     const curUserRoles = await this._userRepository
-      .scope(['withRole'])
+      .scope(['defaultScope'])
       .findOne({
         where: { _id: user._id },
       });
@@ -46,7 +46,7 @@ export class ApplicationRepository {
           },
           {
             model: University,
-            as: 'application_university',
+            as: 'university',
           },
         ],
         attributes: {
@@ -54,7 +54,7 @@ export class ApplicationRepository {
         },
         order: [
           // [User, 'last_name', 'DESC'],
-          ['createdAt', 'DESC'],
+          ['created_at', 'DESC'],
           ['is_archived', 'ASC'],
         ],
       });
@@ -74,7 +74,7 @@ export class ApplicationRepository {
           },
           {
             model: University,
-            as: 'application_university',
+            as: 'university',
           },
         ],
         attributes: {
@@ -82,7 +82,7 @@ export class ApplicationRepository {
         },
         order: [
           // [User, 'last_name', 'DESC'],
-          ['createdAt', 'DESC'],
+          ['created_at', 'DESC'],
           ['is_archived', 'ASC'],
         ],
       });
@@ -102,7 +102,7 @@ export class ApplicationRepository {
           },
           {
             model: University,
-            as: 'application_university',
+            as: 'university',
           },
         ],
         attributes: {
@@ -110,7 +110,7 @@ export class ApplicationRepository {
         },
         order: [
           // [User, 'last_name', 'DESC'],
-          ['createdAt', 'DESC'],
+          ['created_at', 'DESC'],
           ['is_archived', 'ASC'],
         ],
       });

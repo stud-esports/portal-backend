@@ -11,6 +11,7 @@ import { UpdateApplicationDto } from './dto/update-application.dto';
 export class ApplicationsService {
   constructor(
     private _applicationRepository: ApplicationRepository,
+    private teamsService: TeamsService,
     @InjectModel(TeamMember) private _teamMemberRepository: typeof TeamMember,
   ) {}
 
@@ -50,7 +51,7 @@ export class ApplicationsService {
       commentary,
     );
 
-    return this._teamMemberRepository.create({
+    return this.teamsService.setTeamMember({
       user_id,
       team_id,
     });

@@ -33,11 +33,12 @@ export class TeamsService {
     return this._teamRepository.deleteById(id);
   }
 
-  async setTeamMember({ user_id, team_id }) {
+  async setTeamMember({ user_id, team_id }): Promise<TeamMember> {
     const isUserMemberAlready = await this._teamMemberRepository.findOne({
       where: {
         user_id,
         team_id,
+        is_active: true,
       },
     });
 
@@ -57,18 +58,32 @@ export class TeamsService {
       );
     }
 
-    await this._teamMemberRepository.create({
+    return await this._teamRepository.createMember({
       user_id,
       team_id,
+      joined_at: new Date(),
     });
   }
 
   async deleteTeamMember({ user_id, team_id }) {
-    await this._teamMemberRepository.destroy({
+    const member = await this._teamMemberRepository.findOne({
       where: {
         user_id,
         team_id,
+        is_active: true,
       },
+    });
+
+    if (!member) {
+      throw new HttpException(
+        `Участника с такими данными нет`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    await this._teamRepository.updateMember(member._id, {
+      left_at: new Date(),
+      is_active: false,
     });
   }
 }

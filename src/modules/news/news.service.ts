@@ -13,7 +13,10 @@ export class NewsService {
   }
 
   async findAll(user?: User, filters?: { university_id: string }) {
-    return await this.newsRepository.findAll(user, filters);
+    return await this.newsRepository.findAll(user, filters, [
+      'withUser',
+      'withUniversity',
+    ]);
   }
 
   findOne(id: number) {

@@ -74,22 +74,23 @@ interface UserAttrs {
 }
 
 @DefaultScope(() => ({
-  attributes: { exclude: ['password'] },
+  attributes: { exclude: ['password', 'email', 'phone'] },
+  include: [
+    {
+      model: Role,
+      attributes: {
+        exclude: ['_id'],
+      },
+      exclude: [{ model: UserRoles }],
+      through: {
+        attributes: [],
+      },
+    },
+  ],
 }))
 @Scopes(() => ({
-  withPassword: {},
-  withRole: {
+  withUniversity: {
     include: [
-      {
-        model: Role,
-        attributes: {
-          exclude: ['_id'],
-        },
-        exclude: [{ model: UserRoles }],
-        through: {
-          attributes: [],
-        },
-      },
       {
         model: University,
         as: 'moderated_university',
@@ -98,21 +99,41 @@ interface UserAttrs {
         model: University,
         as: 'university',
       },
-      // {
-      //   model: Team,
-      //   attributes: {
-      //     exclude: ['_id'],
-      //   },
-      //   exclude: [{ model: TeamMember }],
-      //   through: {
-      //     attributes: [],
-      //   },
-      // },
     ],
   },
-  allUsers: {
+  withTeam: {
+    include: [
+      {
+        model: Team,
+        as: 'led_team',
+        exclude: [{ model: TeamMember }],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  },
+  withContact: {
+    include: [
+      {
+        model: Contact,
+        as: 'contact',
+      },
+    ],
+  },
+  withPhone: {
     attributes: {
-      exclude: ['password', 'email', 'phone'],
+      include: ['phone'],
+    },
+  },
+  withEmail: {
+    attributes: {
+      include: ['email'],
+    },
+  },
+  withPassword: {
+    attributes: {
+      include: ['password'],
     },
   },
 }))
@@ -340,6 +361,6 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
   @HasOne(() => Contact, 'user_id')
   contact: Contact;
 
-  @HasOne(() => Contact, 'captain_id')
+  @HasOne(() => Team, 'captain_id')
   led_team: Team;
 }

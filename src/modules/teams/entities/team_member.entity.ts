@@ -13,6 +13,7 @@ import { ApiProperty } from '@nestjs/swagger';
 interface TeamMemberCreationAttrs {
   team_id: number;
   user_id: number;
+  joined_at: Date;
 }
 
 interface TeamMemberAttrs {

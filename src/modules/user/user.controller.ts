@@ -100,11 +100,21 @@ export class UsersController {
   @ApiOperation({ summary: 'Получить всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
   @ApiBearerAuth()
-  @Roles(defaultRoles.ADMIN)
+  @Roles(defaultRoles.USER)
   @UseGuards(RolesGuard)
   @Get('get-all')
   async getAll() {
     return await this.usersService.getAllUsers();
+  }
+
+  @ApiOperation({ summary: 'Получить всех пользователей (админ)' })
+  @ApiResponse({ status: 200, type: [User] })
+  @ApiBearerAuth()
+  @Roles(defaultRoles.ADMIN)
+  @UseGuards(RolesGuard)
+  @Get('get-all-by-admin')
+  async getAllByAdmin() {
+    return await this.usersService.getAllUsers(true);
   }
 
   @ApiOperation({ summary: 'Получить данные пользователя по токену' })

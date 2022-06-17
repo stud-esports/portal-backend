@@ -24,7 +24,7 @@ export class EventRepository {
     },
   ): Promise<Event[] | null> {
     const curUserRoles = await this._userRepository
-      .scope(['withRole'])
+      .scope(['defaultScope'])
       .findOne({
         where: { _id: user._id },
       });
@@ -40,7 +40,7 @@ export class EventRepository {
         include: [
           {
             model: University,
-            as: 'event_university',
+            as: 'university',
           },
         ],
       });
@@ -50,7 +50,7 @@ export class EventRepository {
         include: [
           {
             model: University,
-            as: 'event_university',
+            as: 'university',
           },
         ],
       });
@@ -59,7 +59,7 @@ export class EventRepository {
         include: [
           {
             model: University,
-            as: 'event_university',
+            as: 'university',
           },
         ],
       });

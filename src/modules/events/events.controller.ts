@@ -30,8 +30,8 @@ export class EventsController {
   @ApiResponse({ status: 200, type: Event })
   @ApiBearerAuth()
   @Post()
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventsService.create(createEventDto);
+  create(@CurrentUser() user: User, @Body() createEventDto: CreateEventDto) {
+    return this.eventsService.create({ ...createEventDto, user_id: user._id });
   }
 
   @ApiOperation({ summary: 'Получить все события' })

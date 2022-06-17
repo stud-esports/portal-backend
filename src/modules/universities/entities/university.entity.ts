@@ -18,6 +18,9 @@ interface UniversityCreationAttrs {
   short_name: string;
   logo_url?: string;
   address: string;
+  email?: string;
+  phone?: string;
+  link?: string;
 }
 
 interface UniversityAttrs {
@@ -26,6 +29,9 @@ interface UniversityAttrs {
   short_name: string;
   logo_url?: string;
   address: string;
+  email?: string;
+  phone?: string;
+  link?: string;
   // Sequelize Relations
   moderators: User[];
   contacts: Contact[];
@@ -70,6 +76,28 @@ export class University extends Model<
     unique: true,
   })
   short_name: string;
+
+  @ApiProperty({ example: 'user@mail.ru', description: 'E-mail университета' })
+  @Column({
+    type: DataType.STRING,
+    unique: true,
+    allowNull: false,
+  })
+  email: string;
+
+  @ApiProperty({
+    example: '+7(999)9999999',
+    description: 'Номер университета',
+  })
+  @Column({ type: DataType.STRING, allowNull: true, unique: true })
+  phone: string;
+
+  @ApiProperty({
+    example: 'mospolytech.ru',
+    description: 'url главного сайта университета',
+  })
+  @Column({ type: DataType.STRING, allowNull: true, unique: true })
+  link: string;
 
   @ApiProperty({
     example: '/photos/Image-bcd5.jpg',

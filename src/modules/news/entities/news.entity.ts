@@ -3,9 +3,11 @@ import {
   BelongsTo,
   Column,
   DataType,
+  DefaultScope,
   ForeignKey,
   HasMany,
   Model,
+  Scopes,
   Sequelize,
   Table,
 } from 'sequelize-typescript';
@@ -42,6 +44,33 @@ interface NewsAttrs {
   files: File[];
 }
 
+@DefaultScope(() => ({}))
+@Scopes(() => ({
+  withUniversity: {
+    include: [
+      {
+        model: University,
+        as: 'university',
+      },
+    ],
+  },
+  withUser: {
+    include: [
+      {
+        model: User,
+        as: 'user',
+      },
+    ],
+  },
+  withEvent: {
+    include: [
+      {
+        model: Event,
+        as: 'event',
+      },
+    ],
+  },
+}))
 @Table({ tableName: 'news', createdAt: false, updatedAt: false })
 export class News extends Model<NewsAttrs, NewsCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })

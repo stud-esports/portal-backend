@@ -35,8 +35,14 @@ export class NewsController {
   @ApiOperation({ summary: 'Создать новость' })
   @ApiBearerAuth()
   @Post()
-  create(@Body() createNewsDto: CreateNewsDto) {
-    return this.newsService.create(createNewsDto);
+  async create(
+    @CurrentUser() user: User,
+    @Body() createNewsDto: CreateNewsDto,
+  ) {
+    return await this.newsService.create({
+      ...createNewsDto,
+      user_id: user._id,
+    });
   }
 
   @ApiOperation({ summary: 'Получить все новости' })
@@ -47,6 +53,7 @@ export class NewsController {
     @CurrentUser() user?: User,
     @Query() filters?: { university_id: string },
   ) {
+    console.log({ user });
     if (filters?.university_id !== 'undefined') {
       return await this.newsService.findAll(user, filters);
     } else {

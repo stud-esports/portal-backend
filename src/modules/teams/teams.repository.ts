@@ -7,16 +7,31 @@ import { User } from '../user/entities/user.entity';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team } from './entities/team.entity';
+import { TeamMember } from './entities/team_member.entity';
+import { CreateTeamMemberDto } from './dto/create-team-member.dto';
+import { UpdateTeamMemberDto } from './dto/update-team-member.dto';
 
 @Injectable()
 export class TeamRepository {
   constructor(
     @InjectModel(Team) private team: typeof Team,
+    @InjectModel(TeamMember) private teamMember: typeof TeamMember,
     @InjectModel(User) private _userRepository: typeof User,
   ) {}
 
   public async create(createGameDto: CreateTeamDto) {
     return this.team.create({ ...createGameDto });
+  }
+
+  public async createMember(createGameDto: CreateTeamMemberDto) {
+    return this.teamMember.create({ ...createGameDto });
+  }
+
+  public async updateMember(
+    id: number,
+    dto: UpdateTeamMemberDto,
+  ): Promise<[affectedCount: number]> {
+    return this.teamMember.update(dto, { where: { _id: id } });
   }
 
   public async findAll(
@@ -26,7 +41,7 @@ export class TeamRepository {
     },
   ): Promise<Team[] | null> {
     const curUserRoles = await this._userRepository
-      .scope(['withRole'])
+      .scope(['defaultScope'])
       .findOne({
         where: { _id: user._id },
       });
@@ -54,7 +69,7 @@ export class TeamRepository {
           },
           {
             model: University,
-            as: 'team_university',
+            as: 'university',
           },
         ],
       });
@@ -76,7 +91,7 @@ export class TeamRepository {
           },
           {
             model: University,
-            as: 'team_university',
+            as: 'university',
           },
         ],
       });
@@ -97,7 +112,7 @@ export class TeamRepository {
           },
           {
             model: University,
-            as: 'team_university',
+            as: 'university',
           },
         ],
       });

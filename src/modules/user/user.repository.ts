@@ -18,13 +18,17 @@ export class UsersRepository {
     return await bcrypt.hash(password, salt);
   }
 
-  public async findAll(): Promise<User[] | null> {
-    return this.users.scope(['defaultScope', 'withRole', 'allUsers']).findAll();
+  public async findAll(customScopes?: string[]): Promise<User[] | null> {
+    const scopes = ['defaultScope'];
+    if (customScopes) {
+      scopes.push(...customScopes);
+    }
+    return this.users.scope(scopes).findAll();
   }
 
   public async findByKeyword(params: { text: string }): Promise<User[] | null> {
     const text = params.text.trim().toLocaleLowerCase();
-    return this.users.scope(['defaultScope', 'withRole', 'allUsers']).findAll({
+    return this.users.scope(['defaultScope']).findAll({
       where: {
         [Op.or]: [
           sequelize.where(
@@ -51,11 +55,13 @@ export class UsersRepository {
     id: number,
     withPassword = false,
   ): Promise<User | null> {
-    return this.users
-      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
-      .findOne({
-        where: { _id: id },
-      });
+    const scopes = ['defaultScope'];
+    if (withPassword) {
+      scopes.push('withPassword');
+    }
+    return this.users.scope(scopes).findOne({
+      where: { _id: id },
+    });
   }
 
   public async deleteById(id: number): Promise<number | null> {
@@ -66,39 +72,45 @@ export class UsersRepository {
     email: string,
     withPassword = false,
   ): Promise<User | null> {
-    return this.users
-      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
-      .findOne({
-        where: {
-          email: where(fn('lower', col('email')), email.trim().toLowerCase()),
-        },
-      });
+    const scopes = ['defaultScope'];
+    if (withPassword) {
+      scopes.push('withPassword');
+    }
+    return this.users.scope(scopes).findOne({
+      where: {
+        email: where(fn('lower', col('email')), email.trim().toLowerCase()),
+      },
+    });
   }
 
   public async findByPhone(
     phone: string,
     withPassword = false,
   ): Promise<User | null> {
-    return this.users
-      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
-      .findOne({
-        where: {
-          phone: where(fn('lower', col('phone')), phone.trim().toLowerCase()),
-        },
-      });
+    const scopes = ['defaultScope'];
+    if (withPassword) {
+      scopes.push('withPassword');
+    }
+    return this.users.scope(scopes).findOne({
+      where: {
+        phone: where(fn('lower', col('phone')), phone.trim().toLowerCase()),
+      },
+    });
   }
 
   public async findByLogin(
     login: string,
     withPassword = false,
   ): Promise<User | null> {
-    return this.users
-      .scope([withPassword ? 'withPassword' : 'defaultScope', 'withRole'])
-      .findOne({
-        where: {
-          login: where(fn('lower', col('login')), login.trim().toLowerCase()),
-        },
-      });
+    const scopes = ['defaultScope'];
+    if (withPassword) {
+      scopes.push('withPassword');
+    }
+    return this.users.scope(scopes).findOne({
+      where: {
+        login: where(fn('lower', col('login')), login.trim().toLowerCase()),
+      },
+    });
   }
 
   public async create({ password, ...dto }: CreateUserDto): Promise<User> {
