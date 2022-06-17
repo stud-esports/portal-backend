@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateUniversityDto } from './dto/create-university.dto';
 import { UpdateUniversityDto } from './dto/update-university.dto';
+import { University } from './entities/university.entity';
 import { UniversitiesRepository } from './universities.repository';
 
 @Injectable()
 export class UniversitiesService {
-  constructor(private _universitiesRepository: UniversitiesRepository) {}
+  constructor(
+    private _universitiesRepository: UniversitiesRepository,
+    @InjectModel(University) private _universityRepository: typeof University,
+  ) {}
 
   create(createUniversityDto: CreateUniversityDto) {
-    return 'This action adds a new university';
+    return this._universitiesRepository.create(createUniversityDto);
   }
 
   findAll() {
@@ -20,10 +25,10 @@ export class UniversitiesService {
   }
 
   update(id: number, updateUniversityDto: UpdateUniversityDto) {
-    return `This action updates a #${id} university`;
+    return this._universitiesRepository.update(id, updateUniversityDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} university`;
+    return this._universitiesRepository.deleteById(id);
   }
 }

@@ -12,6 +12,10 @@ export class ApplicationRepository {
     @InjectModel(User) private _userRepository: typeof User,
   ) {}
 
+  public async create(dto: any) {
+    return this.application.create({ ...dto });
+  }
+
   public async findAll(
     user: User,
     filters: {

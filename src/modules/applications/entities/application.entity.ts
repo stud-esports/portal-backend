@@ -87,13 +87,13 @@ export class Application extends Model {
 
   @Column({
     type: 'TIMESTAMP',
-    allowNull: false,
+    allowNull: true,
   })
   createdAt: string;
 
   @Column({
     type: 'TIMESTAMP',
-    allowNull: false,
+    allowNull: true,
   })
   updatedAt: string;
 

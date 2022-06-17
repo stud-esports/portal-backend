@@ -4,11 +4,11 @@
 const { mockApplications } = require('../mocks/applications');
 const { mockRoles } = require('../mocks/roles');
 const { mockUsers } = require('../mocks/users');
-const { mockTeams } = require('../mocks/teams');
+const { mockUniversities } = require('../mocks/universities');
 const { mockGames } = require('../mocks/games');
+const { mockTeams } = require('../mocks/teams');
 const { mockEvents } = require('../mocks/events');
 const { mockNews } = require('../mocks/news');
-const { mockUniversities } = require('../mocks/universities');
 const { mockContacts } = require('../mocks/contacts');
 
 module.exports = {
