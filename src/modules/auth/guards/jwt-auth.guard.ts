@@ -28,37 +28,44 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       context.getClass(),
     ]);
 
-    if (isPublic) {
-      return true;
-    }
-
     const req = context.switchToHttp().getRequest();
-    try {
-      const authHeader = req.headers.authorization;
-      const bearer = authHeader.split(' ')[0];
-      const token = authHeader.split(' ')[1];
 
-      if (bearer !== 'Bearer' || !token) {
-        throw new UnauthorizedException({
-          message: 'No access token',
-        });
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+      if (isPublic) {
+        return true;
       }
-
-      const { sub } = this.jwtService.verify<AccessTokenPayload>(token);
-      const user = await this.usersService.getUserById(Number(sub));
-
-      if (!user) {
-        throw new UnauthorizedException({
-          message: 'No user found',
-        });
-      }
-
-      req.user = user;
-      return true;
-    } catch (e) {
       throw new UnauthorizedException({
-        message: 'Token expired or corrupted',
+        message: 'No auth header found',
       });
     }
+
+    const bearer = authHeader.split(' ')[0];
+    const token = authHeader.split(' ')[1];
+
+    if (bearer !== 'Bearer' || !token) {
+      if (isPublic) {
+        return true;
+      }
+      throw new UnauthorizedException({
+        message: 'No access token',
+      });
+    }
+
+    const { sub } = this.jwtService.verify<AccessTokenPayload>(token);
+    const user = await this.usersService.getUserById(Number(sub));
+
+    if (!user) {
+      if (isPublic) {
+        return true;
+      }
+      throw new UnauthorizedException({
+        message: 'No user found',
+      });
+    }
+
+    req.user = user;
+    return true;
   }
 }

@@ -47,6 +47,7 @@ export class NewsController {
 
   @ApiOperation({ summary: 'Получить все новости' })
   @ApiResponse({ status: 201 })
+  @ApiBearerAuth()
   @Public()
   @Get()
   async findAll(
