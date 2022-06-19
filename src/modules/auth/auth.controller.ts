@@ -90,7 +90,7 @@ export class AuthController {
       .send({ access_token, refresh_token, user });
   }
 
-  @ApiOperation({ summary: 'Рефреш токенов' })
+  @ApiOperation({ summary: 'Обновление токенов' })
   @ApiResponse({ status: 200, type: RefreshTokensRes })
   @ApiCookieAuth()
   @Public()

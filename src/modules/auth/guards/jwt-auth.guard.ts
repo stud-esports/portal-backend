@@ -23,49 +23,50 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    try {
+      const isPublic = this.reflector.getAllAndOverride<boolean>(
+        IS_PUBLIC_KEY,
+        [context.getHandler(), context.getClass()],
+      );
 
-    const req = context.switchToHttp().getRequest();
+      const req = context.switchToHttp().getRequest();
 
-    const authHeader = req.headers.authorization;
+      const authHeader = req.headers.authorization;
 
-    if (!authHeader) {
-      if (isPublic) {
-        return true;
+      if (!authHeader) {
+        if (isPublic) {
+          return true;
+        }
+        throw new Error('No auth header found');
       }
+
+      const bearer = authHeader.split(' ')[0];
+      const token = authHeader.split(' ')[1];
+
+      if (bearer !== 'Bearer' || !token) {
+        if (isPublic) {
+          return true;
+        }
+        throw new Error('No access token');
+      }
+
+      const { sub } = this.jwtService.verify<AccessTokenPayload>(token);
+      const user = await this.usersService.getUserById(Number(sub));
+
+      if (!user) {
+        if (isPublic) {
+          return true;
+        }
+        throw new Error('No user found');
+      }
+
+      req.user = user;
+      return true;
+    } catch (e) {
       throw new UnauthorizedException({
-        message: 'No auth header found',
+        message: 'Auth error',
+        details: e.message,
       });
     }
-
-    const bearer = authHeader.split(' ')[0];
-    const token = authHeader.split(' ')[1];
-
-    if (bearer !== 'Bearer' || !token) {
-      if (isPublic) {
-        return true;
-      }
-      throw new UnauthorizedException({
-        message: 'No access token',
-      });
-    }
-
-    const { sub } = this.jwtService.verify<AccessTokenPayload>(token);
-    const user = await this.usersService.getUserById(Number(sub));
-
-    if (!user) {
-      if (isPublic) {
-        return true;
-      }
-      throw new UnauthorizedException({
-        message: 'No user found',
-      });
-    }
-
-    req.user = user;
-    return true;
   }
 }
