@@ -9,7 +9,7 @@ import {
   Sequelize,
   HasMany,
 } from 'sequelize-typescript';
-import { University } from 'src/modules/universities/entities/university.entity';
+import { University } from '../../universities/entities/university.entity';
 import { User } from '../../user/entities/user.entity';
 import { File } from '../../files/entities/file.entity';
 import { Game } from '../../games/entities/game.entity';

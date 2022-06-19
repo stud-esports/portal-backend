@@ -7,8 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { University } from 'src/modules/universities/entities/university.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { University } from '../../universities/entities/university.entity';
+import { User } from '../../user/entities/user.entity';
 
 interface ContactCreationAttrs {
   position: string;

@@ -46,7 +46,7 @@ import { GetByIdParams } from './params/get-by-id.params';
 import { Public } from '../auth/decorators/public-url.decorator';
 
 // ENUMS
-import { defaultRoles } from 'src/enums/defaultRoles.enum';
+import { defaultRoles } from '../../enums/defaultRoles.enum';
 import { CurrentUser } from '../auth/decorators/user.decorator';
 
 @ApiTags('Пользователи')

@@ -9,10 +9,10 @@ import {
   BelongsToMany,
   HasMany,
 } from 'sequelize-typescript';
-import { Application } from 'src/modules/applications/entities/application.entity';
-import { Game } from 'src/modules/games/entities/game.entity';
-import { University } from 'src/modules/universities/entities/university.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { Application } from '../../applications/entities/application.entity';
+import { Game } from '../../games/entities/game.entity';
+import { University } from '../../universities/entities/university.entity';
+import { User } from '../../user/entities/user.entity';
 import { TeamMember } from './team_member.entity';
 
 interface TeamCreationAttrs {

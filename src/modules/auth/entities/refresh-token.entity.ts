@@ -10,7 +10,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 // МОДЕЛИ БД
-import { User } from 'src/modules/user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 interface RefreshTokenCreationAttrs {
   expires: Date;

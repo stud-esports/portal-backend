@@ -10,7 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { defaultRoles } from 'src/enums/defaultRoles.enum';
+import { defaultRoles } from '../../enums/defaultRoles.enum';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { CurrentUser } from '../auth/decorators/user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';

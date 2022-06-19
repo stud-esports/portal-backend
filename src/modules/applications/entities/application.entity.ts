@@ -8,9 +8,9 @@ import {
   BelongsTo,
   Sequelize,
 } from 'sequelize-typescript';
-import { Team } from 'src/modules/teams/entities/team.entity';
-import { University } from 'src/modules/universities/entities/university.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { Team } from '../../teams/entities/team.entity';
+import { University } from '../../universities/entities/university.entity';
+import { User } from '../../user/entities/user.entity';
 
 interface ApplicationCreationAttrs {
   reason: string;

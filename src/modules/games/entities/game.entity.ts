@@ -7,7 +7,7 @@ import {
   HasOne,
   HasMany,
 } from 'sequelize-typescript';
-import { Team } from 'src/modules/teams/entities/team.entity';
+import { Team } from '../../teams/entities/team.entity';
 import { Event } from '../../events/entities/event.entity';
 
 interface GameCreationAttrs {
