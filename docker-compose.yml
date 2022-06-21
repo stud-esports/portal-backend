@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   nginx:
+    user: root
     restart: always
     container_name: ses_nginx
     image: nginx:1.21.6-alpine
@@ -16,6 +17,7 @@ services:
       - ses
 
   postgres:
+    user: root
     container_name: ses_host
     image: postgres:14.3-alpine
     env_file:
@@ -41,6 +43,7 @@ services:
       - ses
 
   pgadmin:
+    user: root
     container_name: ses_pgadmin
     image: dpage/pgadmin4:6.10
     env_file:
@@ -61,6 +64,7 @@ services:
       - ses
 
   backend:
+    user: root
     container_name: ses_backend
     build: .
     command: bash -c "backend-init.sh"
