@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import sequelize, { Op } from 'sequelize';
 import { Game } from '../games/entities/game.entity';
@@ -20,6 +20,16 @@ export class TeamRepository {
   ) {}
 
   public async create(createGameDto: CreateTeamDto) {
+    const team = await this.team.findOne({
+      where: { title: createGameDto.title },
+    });
+    if (team) {
+      throw new HttpException(
+        `Команда с таким названием уже существует`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.team.create({ ...createGameDto });
   }
 
@@ -147,6 +157,29 @@ export class TeamRepository {
     id: number,
     dto: UpdateTeamDto,
   ): Promise<[affectedCount: number]> {
+    const oldTeam = await this.team.findOne({
+      include: [
+        {
+          model: User,
+          as: 'members',
+        },
+      ],
+      where: { _id: id },
+    });
+    if (dto.members_count < oldTeam.members.length) {
+      throw new HttpException(
+        `Новое значение количества участников не может быть меньше, чем текущее количество привязанных к команде участников. Удалите часть участников и после этого вы сможете обновить количество участников на желаемое`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    if (oldTeam.title === dto.title) {
+      throw new HttpException(
+        `Команда с таким названием уже существует`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.team.update(dto, { where: { _id: id } });
   }
 

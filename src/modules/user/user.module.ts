@@ -22,6 +22,7 @@ import { Contact } from '../contacts/entities/contact.entity';
 import { Team } from '../teams/entities/team.entity';
 import { Application } from '../applications/entities/application.entity';
 import { University } from '../universities/entities/university.entity';
+import { TeamMember } from '../teams/entities/team_member.entity';
 
 @Module({
   controllers: [UsersController],
@@ -31,6 +32,7 @@ import { University } from '../universities/entities/university.entity';
       User,
       Role,
       UserRoles,
+      TeamMember,
       Contact,
       Team,
       Application,

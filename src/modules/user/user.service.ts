@@ -77,6 +77,7 @@ export class UsersService {
 
   // ПОЛУЧИТЬ СПИСОК ВСЕХ ПОЛЬЗОВАТЕЛЕЙ
   async getAllUsers(byAdmin = false) {
+    // withTeam
     return await this.usersRepository.findAll(
       byAdmin ? ['withPhone', 'withEmail', 'withUniversity'] : undefined,
     );
