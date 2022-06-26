@@ -54,7 +54,6 @@ export class NewsController {
     @CurrentUser() user?: User,
     @Query() filters?: { university_id: string },
   ) {
-    console.log({ user });
     if (filters?.university_id !== 'undefined') {
       return await this.newsService.findAll(user, filters);
     } else {
@@ -78,7 +77,6 @@ export class NewsController {
     @Body() updateNewsDto: UpdateNewsDto,
     @CurrentUser() user?: User,
   ) {
-    console.log('updateNewsDto', updateNewsDto);
     return this.newsService.update(+id, updateNewsDto);
   }
 

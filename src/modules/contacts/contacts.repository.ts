@@ -63,7 +63,6 @@ export class ContactsRepository {
         ],
       });
     } else {
-      console.log('HI');
       return this.contacts.findAll({
         include: [
           {
