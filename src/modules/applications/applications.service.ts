@@ -16,7 +16,7 @@ export class ApplicationsService {
   ) {}
 
   create(createApplicationDto: CreateApplicationDto) {
-    return 'This action adds a new application';
+    return this._applicationRepository.create(createApplicationDto);
   }
 
   findAll(

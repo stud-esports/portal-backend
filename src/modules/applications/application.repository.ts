@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Op } from 'sequelize';
 import { Team } from '../teams/entities/team.entity';
 import { University } from '../universities/entities/university.entity';
 import { User } from '../user/entities/user.entity';
@@ -11,6 +12,22 @@ export class ApplicationRepository {
     @InjectModel(Application) private application: typeof Application,
     @InjectModel(User) private _userRepository: typeof User,
   ) {}
+
+  public async create(dto: any) {
+    const applications = await this.application.findAll({
+      where: {
+        applicant_id: dto.applicant_id,
+        is_archived: false,
+      },
+    });
+    if (applications.length === 3) {
+      throw new HttpException(
+        `У пользователя уже есть 3 заявки в команды`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return this.application.create({ ...dto });
+  }
 
   public async findAll(
     user: User,
@@ -32,6 +49,38 @@ export class ApplicationRepository {
       curUserRoles?.roles[2]?.getDataValue('name'),
     ];
     let applications = [];
+
+    if (roles.includes('admin')) {
+      applications = await this.application.findAll({
+        include: [
+          {
+            model: User,
+            as: 'applicant',
+          },
+          {
+            model: Team,
+            as: 'team',
+          },
+          {
+            model: University,
+            as: 'university',
+          },
+        ],
+        attributes: {
+          exclude: ['applicant_id', 'team_id'],
+        },
+        order: [
+          // [User, 'last_name', 'DESC'],
+          ['created_at', 'DESC'],
+          ['is_archived', 'ASC'],
+        ],
+      });
+      applications = applications.filter(
+        (a) => a.team?.team_type === team_type,
+      );
+      return applications;
+    }
+
     if (university_id && university_id !== 'undefined') {
       applications = await this.application.findAll({
         where: { university_id: +filters.university_id },
