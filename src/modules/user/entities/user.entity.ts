@@ -106,10 +106,6 @@ interface UserAttrs {
       {
         model: Team,
         as: 'led_team',
-        exclude: [{ model: TeamMember }],
-        through: {
-          attributes: [],
-        },
       },
     ],
   },
