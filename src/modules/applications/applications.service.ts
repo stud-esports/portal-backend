@@ -43,7 +43,6 @@ export class ApplicationsService {
   }
 
   async approveApplication(id, { user_id, team_id, commentary }) {
-    console.log(user_id, team_id);
     await this._applicationRepository.approveApplication(
       id,
       user_id,

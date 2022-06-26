@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   DataType,
+  DefaultScope,
   HasMany,
   HasOne,
   Model,
@@ -12,6 +13,7 @@ import { User } from '../../user/entities/user.entity';
 import { Team } from '../../teams/entities/team.entity';
 import { Contact } from '../../contacts/entities/contact.entity';
 import { Application } from '../../applications/entities/application.entity';
+import { TeamMember } from 'src/modules/teams/entities/team_member.entity';
 
 interface UniversityCreationAttrs {
   title: string;
@@ -39,7 +41,16 @@ interface UniversityAttrs {
   news: News[];
   teams: Team[];
 }
-
+// @DefaultScope(() => ({
+//   include: [
+//     {
+//       model: Contact,
+//       through: {
+//         attributes: [],
+//       },
+//     },
+//   ],
+// }))
 @Table({ tableName: 'universities', createdAt: false, updatedAt: false })
 export class University extends Model<
   UniversityAttrs,
