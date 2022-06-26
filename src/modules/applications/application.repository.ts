@@ -51,7 +51,7 @@ export class ApplicationRepository {
     let applications = [];
 
     if (roles.includes('admin')) {
-      return (applications = await this.application.findAll({
+      applications = await this.application.findAll({
         include: [
           {
             model: User,
@@ -74,8 +74,10 @@ export class ApplicationRepository {
           ['created_at', 'DESC'],
           ['is_archived', 'ASC'],
         ],
-      }));
-      applications = applications.filter((a) => a.team.team_type === team_type);
+      });
+      applications = applications.filter(
+        (a) => a.team?.team_type === team_type,
+      );
       return applications;
     }
 
