@@ -9,7 +9,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 // МОДЕЛИ БД
 import { UserRoles } from './user-role.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 interface RoleCreationAttrs {
   name: string;

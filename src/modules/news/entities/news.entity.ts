@@ -11,7 +11,7 @@ import {
   Sequelize,
   Table,
 } from 'sequelize-typescript';
-import { University } from 'src/modules/universities/entities/university.entity';
+import { University } from '../../universities/entities/university.entity';
 import { User } from '../../user/entities/user.entity';
 import { Event } from '../../events/entities/event.entity';
 import { File } from '../../files/entities/file.entity';

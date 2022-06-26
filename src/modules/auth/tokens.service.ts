@@ -36,13 +36,23 @@ export class TokensService {
     fingerprint: string,
   ): Promise<string> {
     const ttl = getTimeForRefreshToken();
+
+    const dBtoken = await this.refreshTokensRepository.create(
+      user,
+      'temporary',
+      fingerprint,
+      ttl,
+    );
+
     const options: SignOptions = {
       expiresIn: `${process.env.TTL_REFRESH_TOKEN_IN_DAYS || 10}d`,
       subject: String(user._id),
+      jwtid: String(dBtoken._id),
     };
+
     const token = await this.jwtService.signAsync({}, options);
 
-    await this.refreshTokensRepository.create(user, token, fingerprint, ttl);
+    await this.refreshTokensRepository.updateToken(dBtoken._id, token);
 
     return token;
   }

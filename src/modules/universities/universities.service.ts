@@ -8,7 +8,7 @@ export class UniversitiesService {
   constructor(private _universitiesRepository: UniversitiesRepository) {}
 
   create(createUniversityDto: CreateUniversityDto) {
-    return 'This action adds a new university';
+    return this._universitiesRepository.create(createUniversityDto);
   }
 
   findAll() {
@@ -16,14 +16,14 @@ export class UniversitiesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} university`;
+    return this._universitiesRepository.findOne(id);
   }
 
   update(id: number, updateUniversityDto: UpdateUniversityDto) {
-    return `This action updates a #${id} university`;
+    return this._universitiesRepository.update(id, updateUniversityDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} university`;
+    return this._universitiesRepository.deleteById(id);
   }
 }

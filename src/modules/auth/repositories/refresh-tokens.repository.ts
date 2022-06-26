@@ -23,6 +23,13 @@ export class RefreshTokensRepository {
     });
   }
 
+  public async updateToken(
+    id: number,
+    token: string,
+  ): Promise<[affectedCount: number]> {
+    return this.refreshTokens.update({ token }, { where: { _id: id } });
+  }
+
   public async findTokenById(id: number): Promise<RefreshToken | null> {
     return this.refreshTokens.findOne({
       where: {

@@ -16,12 +16,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 // МОДЕЛИ БД
 import { UserRoles } from '../../role/entities/user-role.entity';
-import { Role } from 'src/modules/role/entities/role.entity';
-import { Contact } from 'src/modules/contacts/entities/contact.entity';
-import { Team } from 'src/modules/teams/entities/team.entity';
-import { TeamMember } from 'src/modules/teams/entities/team_member.entity';
-import { Application } from 'src/modules/applications/entities/application.entity';
-import { University } from 'src/modules/universities/entities/university.entity';
+import { Role } from '../../role/entities/role.entity';
+import { Contact } from '../../contacts/entities/contact.entity';
+import { Team } from '../../teams/entities/team.entity';
+import { TeamMember } from '../../teams/entities/team_member.entity';
+import { Application } from '../../applications/entities/application.entity';
+import { University } from '../../universities/entities/university.entity';
 import { File } from '../../files/entities/file.entity';
 
 interface UserCreationAttrs {

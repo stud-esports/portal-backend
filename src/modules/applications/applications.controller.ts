@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { defaultRoles } from 'src/enums/defaultRoles.enum';
+import { Public } from '../auth/decorators/public-url.decorator';
 import { Roles } from '../auth/decorators/roles-auth.decorator';
 import { CurrentUser } from '../auth/decorators/user.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
@@ -24,6 +25,7 @@ export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @Post()
+  @Public()
   create(@Body() createApplicationDto: CreateApplicationDto) {
     return this.applicationsService.create(createApplicationDto);
   }

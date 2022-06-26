@@ -6,6 +6,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { APP_GUARD } from '@nestjs/core';
 import * as path from 'path';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
+import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 // МОДУЛИ
 import { UserModule } from './modules/user/user.module';
@@ -34,6 +36,7 @@ import { Application } from './modules/applications/entities/application.entity'
 import { University } from './modules/universities/entities/university.entity';
 import { File } from './modules/files/entities/file.entity';
 import { Event } from './modules/events/entities/event.entity';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   controllers: [],
@@ -49,6 +52,27 @@ import { Event } from './modules/events/entities/event.entity';
     }),
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
+    }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        secure: false,
+        auth: {
+          user: 'esportmoscowmail@gmail.com',
+          pass: 'kM3qv6a0dZF8',
+        },
+      },
+      defaults: {
+        from: '"No-Replay" <esportmoscowmail@gmail.com>',
+      },
+      template: {
+        dir: __dirname + '/mail/templates',
+        // dir: '../mail/templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',

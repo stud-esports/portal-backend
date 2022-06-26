@@ -7,8 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { News } from 'src/modules/news/entities/news.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { News } from '../../news/entities/news.entity';
+import { User } from '../../user/entities/user.entity';
 import { Team } from '../../teams/entities/team.entity';
 import { Contact } from '../../contacts/entities/contact.entity';
 import { Application } from '../../applications/entities/application.entity';

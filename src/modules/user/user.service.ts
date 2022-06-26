@@ -9,7 +9,7 @@ import { UpdateUserDto } from './dto/update-info.dto';
 import { RolesService } from '../role/role.service';
 
 // ENUMS
-import { defaultRoles } from 'src/enums/defaultRoles.enum';
+import { defaultRoles } from '../../enums/defaultRoles.enum';
 
 // РЕПОЗИТОРИЙ
 import { UsersRepository } from './user.repository';
