@@ -17,7 +17,7 @@ export class ApplicationRepository {
     const applications = await this.application.findAll({
       where: {
         applicant_id: dto.applicant_id,
-        [Op.or]: [{ is_archived: true }, { is_archived: false }],
+        is_archived: false,
       },
     });
     if (applications.length === 3) {
