@@ -8,6 +8,7 @@ import {
   ForeignKey,
   BelongsToMany,
   HasMany,
+  DefaultScope,
 } from 'sequelize-typescript';
 import { Application } from '../../applications/entities/application.entity';
 import { Game } from '../../games/entities/game.entity';
@@ -44,6 +45,14 @@ interface TeamAttrs {
   applications: Application[];
 }
 
+@DefaultScope(() => ({
+  include: [
+    {
+      model: Game,
+      as: 'game',
+    },
+  ],
+}))
 @Table({ tableName: 'teams', createdAt: false, updatedAt: false })
 export class Team extends Model<TeamAttrs, TeamCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })
@@ -66,7 +75,7 @@ export class Team extends Model<TeamAttrs, TeamCreationAttrs> {
 
   @ApiProperty({ example: 'Просто топчик', description: 'Описание команды' })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true,
   })
   description: string;

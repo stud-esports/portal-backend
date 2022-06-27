@@ -86,6 +86,17 @@ interface UserAttrs {
         attributes: [],
       },
     },
+    {
+      model: Team,
+      attributes: {
+        exclude: ['_id'],
+      },
+      as: 'teams',
+      exclude: [{ model: TeamMember }],
+      through: {
+        attributes: [],
+      },
+    },
   ],
 }))
 @Scopes(() => ({

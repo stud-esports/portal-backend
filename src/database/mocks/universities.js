@@ -3,10 +3,10 @@
 module.exports = {
   mockUniversities: [
     {
-      title: 'Московский политехнический университет ',
+      title: 'Московский политехнический университет',
       short_name: 'Московский Политех',
       address: 'г Москва, ул Большая Семеновская д 30',
-      email: 'mospoyltech@mail.ru',
+      email: 'mospolytech@mail.ru',
       phone: '+7(999)8887755',
       link: 'https://mospolytech.ru',
     },
@@ -20,7 +20,7 @@ module.exports = {
     },
     {
       title: 'МГТУ им. Н.Э.Баумана',
-      short_name: 'Бауманка',
+      short_name: 'МТГУ',
       address: 'г Москва, ул Центральная д 29',
       email: 'mgtu@mail.ru',
       phone: '+7(992)8887753',

@@ -16,7 +16,7 @@ module.exports = {
         unique: true,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       members_count: {

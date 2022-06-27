@@ -19,7 +19,12 @@ export class UsersRepository {
   }
 
   public async findAll(customScopes?: string[]): Promise<User[] | null> {
-    const scopes = ['defaultScope'];
+    const scopes = [
+      'defaultScope',
+      'withUniversity',
+      'withTeam',
+      'withContact',
+    ];
     if (customScopes) {
       scopes.push(...customScopes);
     }

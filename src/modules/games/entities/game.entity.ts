@@ -73,7 +73,7 @@ export class Game extends Model<GameAttrs, GameCreationAttrs> {
     description: 'Описание дисциплины (игры)',
   })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: true,
   })
   description: string;

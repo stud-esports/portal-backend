@@ -4,7 +4,8 @@ module.exports = {
   mockTeams: [
     {
       title: 'NaVi',
-      description: 'Описание 1',
+      description:
+        'Условия для вступления: 1. 3к часов минимум, 2. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 6,
       team_type: 'main',
       game_id: 1,
@@ -13,7 +14,8 @@ module.exports = {
     },
     {
       title: 'Astralis',
-      description: 'Описание 2',
+      description:
+        'Условия для вступления: 1. 2к часов минимум, 2. 2200 эло на FACEIT минимум (на текущий момент, т.е. не максимальное за всё время), 3. Наличие личного компьютера, чтобы не ходить играть в клуб каждый раз, 4. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 7,
       team_type: 'main',
       game_id: 2,
@@ -22,7 +24,8 @@ module.exports = {
     },
     {
       title: 'Vitality',
-      description: 'Описание 3',
+      description:
+        'Условия для вступления: 1. 3к часов минимум, 2. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 8,
       team_type: 'main',
       game_id: 3,
@@ -31,7 +34,8 @@ module.exports = {
     },
     {
       title: 'Team Liquid',
-      description: 'Описание 4',
+      description:
+        'Условия для вступления: 1. 3к часов минимум, 2. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 9,
       team_type: 'main',
       game_id: 4,
@@ -39,7 +43,8 @@ module.exports = {
     },
     {
       title: 'ENCE',
-      description: 'Описание 5',
+      description:
+        'Условия для вступления: 1. 3к часов минимум, 2. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 10,
       team_type: 'general',
       game_id: 5,
@@ -47,7 +52,8 @@ module.exports = {
     },
     {
       title: 'FaZe Clan',
-      description: 'Описание 6',
+      description:
+        'Условия для вступления: 1. 3к часов минимум, 2. Наличие свободного времени (~20-24 часа в неделю)',
       captain_id: 11,
       team_type: 'general',
       game_id: 6,

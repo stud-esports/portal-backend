@@ -3,6 +3,7 @@ import {
   BelongsTo,
   Column,
   DataType,
+  DefaultScope,
   ForeignKey,
   Model,
   Table,
@@ -28,6 +29,14 @@ interface ContactAttrs {
   university: University;
 }
 
+@DefaultScope(() => ({
+  include: [
+    {
+      model: User,
+      as: 'user',
+    },
+  ],
+}))
 @Table({ tableName: 'contacts', createdAt: false, updatedAt: false })
 export class Contact extends Model<ContactAttrs, ContactCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Уникальный id' })

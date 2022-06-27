@@ -35,7 +35,7 @@ export class ContactsRepository {
     ];
 
     if (filters.university_id) {
-      return this.contacts.findAll({
+      return this.contacts.scope(['defaultScope']).findAll({
         where: { university_id: +filters.university_id },
         include: [
           {
@@ -49,7 +49,7 @@ export class ContactsRepository {
         ],
       });
     } else if (roles.includes('moderator')) {
-      return this.contacts.findAll({
+      return this.contacts.scope(['defaultScope']).findAll({
         where: { university_id: null },
         include: [
           {
@@ -63,7 +63,7 @@ export class ContactsRepository {
         ],
       });
     } else {
-      return this.contacts.findAll({
+      return this.contacts.scope(['defaultScope']).findAll({
         include: [
           {
             model: User,
@@ -79,13 +79,13 @@ export class ContactsRepository {
   }
 
   public async findOne(id: number) {
-    return this.contacts.findOne({
+    return this.contacts.scope(['defaultScope']).findOne({
       where: { _id: id },
     });
   }
 
   public async findOneByUser(id: number) {
-    return this.contacts.findOne({
+    return this.contacts.scope(['defaultScope']).findOne({
       where: { user_id: id },
     });
   }

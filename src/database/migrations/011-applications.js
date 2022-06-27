@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       reason: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       is_archived: {
