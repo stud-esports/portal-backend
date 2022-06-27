@@ -10,7 +10,7 @@ export class UniversitiesRepository {
   constructor(@InjectModel(University) private university: typeof University) {}
 
   public async findAll(): Promise<University[] | null> {
-    return this.university.findAll();
+    return this.university.scope(['defaultScope']).findAll();
   }
 
   public async create(createUniversityDto: CreateUniversityDto) {
@@ -18,7 +18,9 @@ export class UniversitiesRepository {
   }
 
   public async findOne(id: number) {
-    return this.university.findOne({ where: { _id: id } });
+    return this.university
+      .scope(['defaultScope'])
+      .findOne({ where: { _id: id } });
   }
 
   public async deleteById(id: number): Promise<number | null> {

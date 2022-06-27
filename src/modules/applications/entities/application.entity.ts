@@ -56,7 +56,7 @@ export class Application extends Model<
     description: 'Мотивация',
   })
   @Column({
-    type: DataType.STRING,
+    type: DataType.TEXT,
     allowNull: false,
   })
   reason: string;

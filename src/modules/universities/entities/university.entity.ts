@@ -41,16 +41,19 @@ interface UniversityAttrs {
   news: News[];
   teams: Team[];
 }
-// @DefaultScope(() => ({
-//   include: [
-//     {
-//       model: Contact,
-//       through: {
-//         attributes: [],
-//       },
-//     },
-//   ],
-// }))
+
+@DefaultScope(() => ({
+  include: [
+    {
+      model: Team,
+      as: 'teams',
+    },
+    {
+      model: Contact,
+      as: 'contacts',
+    },
+  ],
+}))
 @Table({ tableName: 'universities', createdAt: false, updatedAt: false })
 export class University extends Model<
   UniversityAttrs,

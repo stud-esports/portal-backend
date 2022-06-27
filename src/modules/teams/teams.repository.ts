@@ -62,7 +62,7 @@ export class TeamRepository {
     ];
 
     if (filters.university_id) {
-      return this.team.findAll({
+      return this.team.scope(['defaultScope']).findAll({
         where: { university_id: +filters.university_id },
         include: [
           {
@@ -84,7 +84,7 @@ export class TeamRepository {
         ],
       });
     } else if (roles.includes('moderator')) {
-      return this.team.findAll({
+      return this.team.scope(['defaultScope']).findAll({
         where: { university_id: null },
         include: [
           {
@@ -106,7 +106,7 @@ export class TeamRepository {
         ],
       });
     } else {
-      return this.team.findAll({
+      return this.team.scope(['defaultScope']).findAll({
         include: [
           {
             model: User,
@@ -130,7 +130,7 @@ export class TeamRepository {
   }
 
   public async findOne(id: number) {
-    return this.team.findOne({
+    return this.team.scope(['defaultScope']).findOne({
       include: [
         {
           model: User,
@@ -185,7 +185,7 @@ export class TeamRepository {
 
   public async findByKeyword(params: { text: string }): Promise<Team[] | null> {
     const text = params.text.trim().toLocaleLowerCase();
-    return this.team.findAll({
+    return this.team.scope(['defaultScope']).findAll({
       where: {
         [Op.or]: [
           sequelize.where(

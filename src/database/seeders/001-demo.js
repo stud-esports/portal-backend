@@ -48,7 +48,10 @@ module.exports = {
       await queryInterface.sequelize.query(`SELECT _id, name from roles;`)
     )[0];
     users.forEach((val) => {
-      if (val.email === 'testadmin@mail.ru') {
+      if (
+        val.email === 'pozdnyakov@mail.ru' ||
+        val.email === 'daryapopova@mail.ru'
+      ) {
         userRolesArr.push(
           {
             role_id: roles.find((val) => val.name === 'admin')._id,

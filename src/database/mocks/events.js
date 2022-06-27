@@ -29,7 +29,7 @@ module.exports = {
       start: '2022-07-16T18:00:00.000Z',
       title: 'Турнир по Overwatch',
       user_id: 1,
-      game_id: 8,
+      game_id: 5,
     },
     {
       description: 'Матч по Call of Duty MW19',
@@ -38,7 +38,7 @@ module.exports = {
       start: '2022-06-23T08:00:00.000Z',
       title: 'Матч по Call of Duty',
       user_id: 1,
-      game_id: 15,
+      game_id: 4,
     },
   ],
 };
