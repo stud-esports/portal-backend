@@ -19,9 +19,9 @@ export class TeamRepository {
     @InjectModel(User) private _userRepository: typeof User,
   ) {}
 
-  public async create(createGameDto: CreateTeamDto) {
+  public async create(createTeamDto: CreateTeamDto) {
     const team = await this.team.findOne({
-      where: { title: createGameDto.title },
+      where: { title: createTeamDto.title },
     });
     if (team) {
       throw new HttpException(
@@ -30,7 +30,7 @@ export class TeamRepository {
       );
     }
 
-    return this.team.create({ ...createGameDto });
+    return this.team.create({ ...createTeamDto });
   }
 
   public async createMember(createGameDto: CreateTeamMemberDto) {
@@ -173,7 +173,7 @@ export class TeamRepository {
       );
     }
 
-    if (oldTeam.title === dto.title) {
+    if (oldTeam.title === dto.title && oldTeam._id !== id) {
       throw new HttpException(
         `Команда с таким названием уже существует`,
         HttpStatus.BAD_REQUEST,
