@@ -24,6 +24,9 @@ export class NewsRepository {
     if (customScopes) {
       scopes.push(...customScopes);
     }
+    if (!user) {
+      return await this.news.scope(scopes).findAll();
+    }
     const curUserRoles = await this._userRepository
       .scope(['defaultScope'])
       .findOne({

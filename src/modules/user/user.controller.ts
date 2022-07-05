@@ -86,7 +86,7 @@ export class UsersController {
   @Public()
   @Get('/check-login')
   async checkLogin(@Query() dto: CheckLoginDto) {
-    return await this.usersService.isEmailAlreadyUsed(dto.login);
+    return await this.usersService.isLoginAlreadyUsed(dto.login);
   }
 
   @ApiOperation({ summary: 'Проверить существование номера' })
@@ -94,7 +94,7 @@ export class UsersController {
   @Public()
   @Get('/check-phone')
   async checkPhone(@Query() dto: CheckPhoneDto) {
-    return await this.usersService.isEmailAlreadyUsed(dto.phone);
+    return await this.usersService.isPhoneAlreadyUsed(dto.phone);
   }
 
   @ApiOperation({ summary: 'Получить всех пользователей' })

@@ -213,7 +213,7 @@ export class User extends Model<UserAttrs, UserCreationAttrs> {
     allowNull: false,
     defaultValue: false,
   })
-  is_online: string;
+  is_online: boolean;
 
   @ApiProperty({
     example: '2021-05-12T06:57:24.059Z',

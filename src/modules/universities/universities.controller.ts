@@ -12,6 +12,7 @@ import { CreateUniversityDto } from './dto/create-university.dto';
 import { UpdateUniversityDto } from './dto/update-university.dto';
 import { University } from './entities/university.entity';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Public } from '../auth/decorators/public-url.decorator';
 
 @Controller('universities')
 export class UniversitiesController {
@@ -24,6 +25,7 @@ export class UniversitiesController {
 
   @ApiOperation({ summary: 'Получить все университеты' })
   @ApiResponse({ status: 201, type: [University] })
+  @Public()
   @Get()
   findAll() {
     return this.universitiesService.findAll();

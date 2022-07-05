@@ -33,10 +33,10 @@ export class AuthController {
     );
 
     response
-      .cookie('refresh_token', refresh_token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-      })
+      // .cookie('refresh_token', refresh_token, {
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      // })
       .send({ access_token, refresh_token, user });
   }
 
@@ -76,17 +76,17 @@ export class AuthController {
     );
 
     response
-      .cookie('refresh_token', refresh_token, {
-        httpOnly: true,
-        expires: new Date(
-          Date.now() +
-            1000 *
-              60 *
-              60 *
-              24 *
-              (Number(process.env.TTL_REFRESH_TOKEN_IN_DAYS) || 10),
-        ),
-      })
+      // .cookie('refresh_token', refresh_token, {
+      //   httpOnly: true,
+      //   expires: new Date(
+      //     Date.now() +
+      //       1000 *
+      //         60 *
+      //         60 *
+      //         24 *
+      //         (Number(process.env.TTL_REFRESH_TOKEN_IN_DAYS) || 10),
+      //   ),
+      // })
       .send({ access_token, refresh_token, user });
   }
 
@@ -102,17 +102,17 @@ export class AuthController {
         'testFingerPrint',
       );
     response
-      .cookie('refresh_token', refresh_token, {
-        httpOnly: true,
-        expires: new Date(
-          Date.now() +
-            1000 *
-              60 *
-              60 *
-              24 *
-              (Number(process.env.TTL_REFRESH_TOKEN_IN_DAYS) || 10),
-        ),
-      })
+      // .cookie('refresh_token', refresh_token, {
+      //   httpOnly: true,
+      //   expires: new Date(
+      //     Date.now() +
+      //       1000 *
+      //         60 *
+      //         60 *
+      //         24 *
+      //         (Number(process.env.TTL_REFRESH_TOKEN_IN_DAYS) || 10),
+      //   ),
+      // })
       .send({ access_token, refresh_token });
   }
 
@@ -125,6 +125,6 @@ export class AuthController {
     if (request.cookies.refresh_token) {
       await this.authService.logout(request.cookies.refresh_token);
     }
-    response.clearCookie('refresh_token').send();
+    response.send();
   }
 }
